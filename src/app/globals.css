@@ -1,0 +1,149 @@
+@import "tailwindcss";
+
+/* ============================
+   DARK RED DESIGN SYSTEM
+   Modern. Bold. Creative.
+   ============================ */
+
+@layer base {
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(239, 68, 68, 0.3) transparent;
+  }
+
+  *::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background: rgba(239, 68, 68, 0.3);
+    border-radius: 10px;
+  }
+
+  *::-webkit-scrollbar-thumb:hover {
+    background: rgba(239, 68, 68, 0.6);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    background-color: #111111;
+    color: #a3a3a3; /* neutral-400 */
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Syne', sans-serif;
+    color: #ffffff;
+  }
+
+  ::selection {
+    background-color: rgba(239, 68, 68, 0.3);
+    color: #ffffff;
+  }
+
+  a {
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+}
+
+@layer components {
+  /* Wireframe geometric container */
+  .wireframe-box {
+    position: relative;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.02);
+    transition: all 0.3s ease;
+  }
+
+  .wireframe-box:hover {
+    border-color: rgba(239, 68, 68, 0.5); /* red accent */
+  }
+
+  /* Red accent button */
+  .btn-accent {
+    background-color: #ffffff;
+    color: #111111;
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+  
+  .btn-accent:hover {
+    background-color: #ef4444;
+    color: #ffffff;
+  }
+
+  .btn-outline {
+    background-color: transparent;
+    color: #ffffff;
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+
+  .btn-outline:hover {
+    border-color: #ef4444;
+    color: #ef4444;
+  }
+}
+
+@layer utilities {
+  .text-accent {
+    color: #ef4444;
+  }
+}
+
+@keyframes fadeSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@theme {
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-heading: 'Syne', sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+  
+  --animate-marquee: marquee 60s linear infinite;
+  
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+}
+
+/* Subtle section borders */
+section {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}

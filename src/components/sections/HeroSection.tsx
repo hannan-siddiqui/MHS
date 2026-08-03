@@ -2,6 +2,7 @@
 
 import { summary, personalInfo, skills } from "@/data/portfolio";
 import Image from "next/image";
+import hannanImg from "@/data/Hannan.jpg";
 
 export default function HeroSection() {
   const allSkills = skills.flatMap((cat) => cat.skills.map((s) => s.name));
@@ -53,7 +54,7 @@ export default function HeroSection() {
              }}
            >
               <Image
-                src="/hannan.jpg"
+                src={hannanImg}
                 alt={`${personalInfo.firstName} ${personalInfo.lastName}`}
                 fill
                 className="object-cover object-top opacity-80"

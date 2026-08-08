@@ -177,20 +177,30 @@ export const experiences: Experience[] = [
     description:
       "Building enterprise AI and full stack applications with cutting-edge technologies.",
     highlights: [
-      "Developed Generative AI solutions using LLMs and RAG pipelines.",
-      "Built scalable microservices on AWS cloud infrastructure.",
-      "Implemented Agentic AI workflows with LangGraph and multi-agent systems.",
-      "Designed and deployed cloud-native applications using Docker and CI/CD.",
-      "Collaborated with cross-functional teams to deliver high-quality software.",
-      "Optimized database queries and improved application performance by 30%.",
+      "Architected an advanced Retrieval-Augmented Generation (RAG) pipeline for an enterprise ticketing system, enabling seamless document ingestion and contextual Q&A utilizing Python, LangChain, Vector DBs, and Hybrid Search.",
+      "Engineered an automated email processing engine powered by AWS Bedrock to instantly summarize complex support threads and generate highly accurate draft responses via Prompt Engineering and Structured Outputs.",
+      "Architected a document-to-document RAG solution using Azure OpenAI and LangChain to parse massive text corpora, synthesize the retrieved context, and generate precise, structured output documents with enforced Guardrails to prevent hallucinations.",
+      "Developed core modules for a branded alumni portal designed to streamline employee exits, strengthen alumni connections, enable referrals, and provide personalized career opportunities through an integrated AI-based job recommendation system.",
+      "Built core platform modules using React.js, Node.js and deployed the application using AWS EC2, AWS S3, CloudFront and AWS RDS.",
+      "Designed and developed a complete HR Dashboard as a standalone full-stack solution, enabling HR to manage employees.",
+      "Built a complete DocuSign-based workflow using React.js, DynamoDB and Node.js to automate document signing, sending, tracking, and signature retrieval.",
     ],
     technologies: [
       "Python",
-      "TypeScript",
-      "React",
+      "JavaScript/TypeScript",
+      "React.js",
+      "Node.js",
+      "FastAPI",
       "AWS",
       "LangGraph",
-      "FastAPI",
+      "Docker",
+      "Azure OpenAI",
+      "AWS Bedrock",
+      "AWS S3",
+      "AWS EC2",
+      "AWS RDS",
+      "AWS CloudFront",
+      "AWS DynamoDB"
     ],
   },
 ];
@@ -223,7 +233,7 @@ export const projects: Project[] = [
     id: "proj-2",
     title: "RAG Document Analyzer",
     description: "Enterprise-grade Retrieval-Augmented Generation system for analyzing complex PDF documents with high accuracy.",
-    technologies: ["Next.js", "TypeScript", "Vector DB", "OpenAI", "Tailwind CSS"],
-    githubUrl: "#",
+    technologies: ["Next.js", "FastApi", "TypeScript", "Vector DB", "OpenAI"],
+    githubUrl: "#"
   }
 ];

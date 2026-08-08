@@ -2,14 +2,22 @@
 
 import { experiences } from "@/data/portfolio";
 import { Briefcase } from "lucide-react";
+import { motion } from "framer-motion";
+import { fadeInUp, slideInLeft, staggerContainer } from "@/lib/animations";
 
 export default function ExperienceSection() {
   return (
     <section id="experience" className="py-24 relative bg-[#111111]">
-      <div className="max-w-[1400px] mx-auto px-6 relative z-10">
+      <motion.div 
+        variants={staggerContainer}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        className="max-w-[1400px] mx-auto px-6 relative z-10"
+      >
         
         {/* Section header */}
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-16 gap-6">
+        <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row sm:items-end justify-between mb-16 gap-6">
           <h2 className="text-4xl sm:text-5xl font-heading font-extrabold text-white">
             My Experience
             <br />
@@ -17,12 +25,14 @@ export default function ExperienceSection() {
               Professional Journey
             </span>
           </h2>
-        </div>
+        </motion.div>
 
         {/* Cards container */}
         <div className="flex flex-col gap-6">
           {experiences.map((exp, i) => (
-            <div
+            <motion.div
+              variants={slideInLeft}
+              whileHover={{ x: 5 }}
               key={exp.id}
               className="wireframe-box p-8 rounded-lg group flex flex-col h-full"
             >
@@ -66,11 +76,11 @@ export default function ExperienceSection() {
                   </span>
                 ))}
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
         
-      </div>
+      </motion.div>
     </section>
   );
 }

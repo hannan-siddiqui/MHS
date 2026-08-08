@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import { skills } from "@/data/portfolio";
+import { motion } from "framer-motion";
+import { fadeInUp, staggerContainer, scaleUp } from "@/lib/animations";
 
 export default function SkillsSection() {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -9,9 +11,15 @@ export default function SkillsSection() {
 
   return (
     <section id="skills" className="px-6 py-24 relative">
-      <div className="max-w-[1400px] mx-auto relative z-10">
+      <motion.div 
+        variants={staggerContainer}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        className="max-w-[1400px] mx-auto relative z-10"
+      >
         {/* Section header */}
-        <div className="flex items-end gap-6 mb-16">
+        <motion.div variants={fadeInUp} className="flex items-end gap-6 mb-16">
           <span className="text-7xl sm:text-9xl font-extrabold leading-none text-white/5 select-none">
             02
           </span>
@@ -23,10 +31,10 @@ export default function SkillsSection() {
               Technical expertise
             </div>
           </div>
-        </div>
+        </motion.div>
 
         {/* Category tabs */}
-        <div className="flex flex-wrap gap-3 mb-8">
+        <motion.div variants={fadeInUp} className="flex flex-wrap gap-3 mb-8">
           {skills.map((cat, i) => (
             <button
               key={cat.category}
@@ -40,10 +48,10 @@ export default function SkillsSection() {
               <span className="text-sm">{cat.icon}</span> {cat.category}
             </button>
           ))}
-        </div>
+        </motion.div>
 
         {/* Skills wrapper */}
-        <div className="premium-glass p-1">
+        <motion.div variants={fadeInUp} className="premium-glass p-1">
           <div className="bg-[#09090b]/80 rounded-[1.3rem] overflow-hidden">
             {/* Category description */}
             <div className="px-8 py-6 border-b border-white/5 bg-white/[0.02]">
@@ -53,15 +61,19 @@ export default function SkillsSection() {
             </div>
 
             {/* Skills grid */}
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 p-2" key={activeIndex}>
+            <motion.div 
+              className="grid sm:grid-cols-2 lg:grid-cols-3 p-2" 
+              key={activeIndex}
+              variants={staggerContainer}
+              initial="hidden"
+              animate="visible"
+            >
               {activeCategory.skills.map((skill, i) => (
-                <div
+                <motion.div
+                  variants={scaleUp}
+                  whileHover={{ y: -5 }}
                   key={skill.name}
-                  className="p-6 m-2 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-white/20 transition-all hover:-translate-y-1 group"
-                  style={{
-                    animationDelay: `${i * 50}ms`,
-                    animation: "fadeSlideUp 0.4s ease-out backwards",
-                  }}
+                  className="p-6 m-2 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-white/20 transition-colors group"
                 >
                   <div className="flex items-baseline justify-between mb-4">
                     <span className="text-base font-bold tracking-tight text-zinc-200 group-hover:text-white transition-colors">
@@ -83,12 +95,12 @@ export default function SkillsSection() {
                       />
                     </div>
                   )}
-                </div>
+                </motion.div>
               ))}
-            </div>
+            </motion.div>
           </div>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
     </section>
   );
 }

@@ -2,14 +2,22 @@
 
 import { projects } from "@/data/portfolio";
 import { FolderGit2, ExternalLink, Code2 } from "lucide-react";
+import { motion } from "framer-motion";
+import { fadeInUp, staggerContainer } from "@/lib/animations";
 
 export default function ProjectsSection() {
   return (
     <section id="projects" className="py-24 relative bg-[#0a0a0a]">
-      <div className="max-w-[1400px] mx-auto px-6 relative z-10">
+      <motion.div 
+        variants={staggerContainer}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        className="max-w-[1400px] mx-auto px-6 relative z-10"
+      >
         
         {/* Section header */}
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-16 gap-6">
+        <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row sm:items-end justify-between mb-16 gap-6">
           <h2 className="text-4xl sm:text-5xl font-heading font-extrabold text-white">
             My Projects
             <br />
@@ -17,12 +25,14 @@ export default function ProjectsSection() {
               Recent Work
             </span>
           </h2>
-        </div>
+        </motion.div>
 
         {/* Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {projects.map((project) => (
-            <div
+            <motion.div
+              variants={fadeInUp}
+              whileHover={{ y: -5 }}
               key={project.id}
               className="wireframe-box p-8 rounded-lg group flex flex-col h-full bg-[#111111]"
             >
@@ -65,11 +75,11 @@ export default function ProjectsSection() {
                   </span>
                 ))}
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
         
-      </div>
+      </motion.div>
     </section>
   );
 }

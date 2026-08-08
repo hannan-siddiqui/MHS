@@ -2,6 +2,8 @@
 
 import { summary, skills } from "@/data/portfolio";
 import { Code2, Cpu, Sparkles, Terminal } from "lucide-react";
+import { motion } from "framer-motion";
+import { fadeInUp, slideInLeft, staggerContainer, scaleUp } from "@/lib/animations";
 
 export default function AboutSection() {
   const topCategories = skills.slice(0, 4);
@@ -9,10 +11,16 @@ export default function AboutSection() {
 
   return (
     <section id="about" className="py-24 relative overflow-hidden bg-[#111111]">
-      <div className="max-w-[1400px] mx-auto px-6 relative z-10 flex flex-col lg:flex-row gap-16 lg:gap-24">
+      <motion.div 
+        variants={staggerContainer}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        className="max-w-[1400px] mx-auto px-6 relative z-10 flex flex-col lg:flex-row gap-16 lg:gap-24"
+      >
         
         {/* Left — Intro & Geometric Shape */}
-        <div className="flex-1 lg:max-w-md">
+        <motion.div variants={slideInLeft} className="flex-1 lg:max-w-md">
           {/* Wireframe isometric SVG decoration */}
           <div className="mb-10 w-32 h-32 opacity-80 text-white">
             <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full stroke-current stroke-1">
@@ -39,7 +47,7 @@ export default function AboutSection() {
           <p className="text-neutral-400 text-sm leading-relaxed font-light">
             {summary.description}
           </p>
-        </div>
+        </motion.div>
 
         {/* Right — Expertise Grid */}
         <div className="flex-1 flex flex-col justify-center">
@@ -53,7 +61,9 @@ export default function AboutSection() {
             {topCategories.map((cat, i) => {
               const Icon = icons[i % icons.length];
               return (
-                <div 
+                <motion.div 
+                  variants={scaleUp}
+                  whileHover={{ scale: 1.02 }}
                   key={cat.category}
                   className="wireframe-box p-8 rounded-lg group flex flex-col h-full"
                 >
@@ -78,13 +88,13 @@ export default function AboutSection() {
                       </span>
                     ))}
                   </div>
-                </div>
+                </motion.div>
               );
             })}
           </div>
         </div>
 
-      </div>
+      </motion.div>
     </section>
   );
 }

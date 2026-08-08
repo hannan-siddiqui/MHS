@@ -131,7 +131,7 @@
   --font-heading: 'Syne', sans-serif;
   --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
   
-  --animate-marquee: marquee 60s linear infinite;
+  --animate-marquee: marquee 10s linear infinite;
   
   @keyframes marquee {
     from {

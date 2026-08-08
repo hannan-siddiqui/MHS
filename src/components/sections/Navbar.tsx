@@ -25,7 +25,7 @@ export default function Navbar() {
           }}
           className="text-2xl font-heading font-bold uppercase tracking-widest text-white hover:text-accent transition-colors flex items-center"
         >
-          {personalInfo.firstName}
+          {personalInfo.lastName}
           <span className="text-accent">.</span>
         </a>
 

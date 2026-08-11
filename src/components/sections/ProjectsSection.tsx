@@ -1,11 +1,14 @@
 "use client";
 
-import { projects } from "@/data/portfolio";
+import { projects, Project } from "@/data/portfolio";
 import { FolderGit2, ExternalLink, Code2 } from "lucide-react";
 import { motion } from "framer-motion";
 import { fadeInUp, staggerContainer } from "@/lib/animations";
+import { useRouter } from "next/navigation";
 
 export default function ProjectsSection() {
+  const router = useRouter();
+
   return (
     <section id="projects" className="py-24 relative bg-[#0a0a0a]">
       <motion.div 
@@ -34,7 +37,8 @@ export default function ProjectsSection() {
               variants={fadeInUp}
               whileHover={{ y: -5 }}
               key={project.id}
-              className="wireframe-box p-8 rounded-lg group flex flex-col h-full bg-[#111111]"
+              onClick={() => router.push(`/project/${project.id}`)}
+              className="wireframe-box p-8 rounded-lg group flex flex-col h-full bg-[#111111] cursor-pointer hover:border-white/20 transition-colors"
             >
               <div className="flex items-center justify-between mb-6">
                 <div className="w-10 h-10 flex items-center justify-center text-accent shrink-0">
@@ -42,12 +46,12 @@ export default function ProjectsSection() {
                 </div>
                 <div className="flex items-center gap-3">
                   {project.githubUrl && (
-                    <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="text-neutral-500 hover:text-white transition-colors">
+                    <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()} className="text-neutral-500 hover:text-white transition-colors">
                       <Code2 className="w-5 h-5" />
                     </a>
                   )}
                   {project.liveUrl && (
-                    <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className="text-neutral-500 hover:text-accent transition-colors">
+                    <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()} className="text-neutral-500 hover:text-accent transition-colors">
                       <ExternalLink className="w-5 h-5" />
                     </a>
                   )}
@@ -64,6 +68,10 @@ export default function ProjectsSection() {
                 {project.description}
               </p>
               
+              <div className="mb-6 flex items-center text-xs font-mono font-semibold text-accent group-hover:text-white transition-colors">
+                VIEW DETAILS <span className="ml-2 group-hover:translate-x-1 transition-transform">→</span>
+              </div>
+
               {/* Tech stack */}
               <div className="mt-auto pt-4 border-t border-white/5 flex flex-wrap gap-2">
                 {project.technologies.map((tech) => (

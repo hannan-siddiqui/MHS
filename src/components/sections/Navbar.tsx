@@ -1,13 +1,20 @@
 "use client";
 
 import { useState } from "react";
+import { usePathname, useRouter } from "next/navigation";
 import { navigation, personalInfo } from "@/data/portfolio";
 
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const pathname = usePathname();
+  const router = useRouter();
 
   const handleClick = (href: string) => {
     setMobileOpen(false);
+    if (pathname !== "/") {
+      router.push(href === "#home" ? "/" : `/${href}`);
+      return;
+    }
     const id = href.replace("#", "");
     const el = document.getElementById(id);
     if (el) el.scrollIntoView({ behavior: "smooth" });
@@ -18,7 +25,7 @@ export default function Navbar() {
       <div className="max-w-[1400px] mx-auto px-6 py-5 flex items-center justify-between">
         {/* Logo */}
         <a
-          href="#home"
+          href="/"
           onClick={(e) => {
             e.preventDefault();
             handleClick("#home");

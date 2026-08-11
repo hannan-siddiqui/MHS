@@ -11,7 +11,7 @@ export default function Footer() {
           {/* Column 1: Brand & Contact Info */}
           <div className="md:col-span-1">
              <a
-              href="#home"
+              href="/"
               className="text-2xl font-heading font-bold uppercase tracking-widest text-white hover:text-accent transition-colors flex items-center mb-6"
             >
               {personalInfo.firstName + " " + personalInfo.lastName}
@@ -55,13 +55,13 @@ export default function Footer() {
 
           {/* Column 3: Back to Top */}
           <div className="md:col-span-1 flex items-start md:justify-end">
-             <a 
-              href="#home"
-              className="text-xs font-semibold uppercase tracking-widest text-neutral-400 hover:text-white transition-colors flex items-center gap-2 group"
+             <button 
+              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+              className="text-xs font-semibold uppercase tracking-widest text-neutral-400 hover:text-white transition-colors flex items-center gap-2 group cursor-pointer bg-transparent border-none"
             >
               Back to Top
               <span className="text-accent group-hover:-translate-y-1 transition-transform">↑</span>
-            </a>
+            </button>
           </div>
 
         </div>

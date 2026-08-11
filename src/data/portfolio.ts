@@ -218,22 +218,160 @@ export interface Project {
   githubUrl?: string;
   liveUrl?: string;
   image?: string;
+  detailedDescription?: string[];
+  features?: string[];
+  architecture?: {
+    nodes: { id: string; label: string; icon?: string; x: number; y: number }[];
+    edges: { source: string; target: string; label?: string; animated?: boolean }[];
+  };
 }
 
 export const projects: Project[] = [
+  // {
+  //   id: "proj-1",
+  //   title: "AI Agent Platform",
+  //   description: "A comprehensive platform for building, testing, and deploying autonomous AI agents using LangGraph and AWS.",
+  //   technologies: ["React", "Python", "LangGraph", "AWS Bedrock", "FastAPI"],
+  //   githubUrl: "#",
+  //   liveUrl: "#",
+  //   detailedDescription: [
+  //     "A comprehensive platform designed to democratize the creation and deployment of autonomous AI agents.",
+  //     "By leveraging LangGraph for stateful multi-actor workflows and AWS Bedrock for scalable foundation models, the system allows developers to build, evaluate, and monitor complex Agentic AI systems with a visual graph approach."
+  //   ],
+  //   features: [
+  //     "Visual Agent Builder with React and interactive node graphs",
+  //     "Stateful workflows and orchestration powered by LangGraph",
+  //     "Seamless integration with AWS Bedrock for multiple LLM choices",
+  //     "Real-time logging and tracing for agent debugging"
+  //   ],
+  //   architecture: {
+  //     nodes: [
+  //       { id: "ui", label: "React UI", x: 15, y: 50 },
+  //       { id: "api", label: "FastAPI Backend", x: 40, y: 50 },
+  //       { id: "agent", label: "LangGraph Orchestrator", x: 65, y: 25 },
+  //       { id: "aws", label: "AWS Bedrock", x: 85, y: 50 }
+  //     ],
+  //     edges: [
+  //       { source: "ui", target: "api", animated: true },
+  //       { source: "api", target: "agent", animated: true },
+  //       { source: "agent", target: "aws", animated: true },
+  //       { source: "aws", target: "agent", animated: true },
+  //       { source: "agent", target: "api", animated: true }
+  //     ]
+  //   }
+  // },
   {
-    id: "proj-1",
-    title: "AI Agent Platform",
-    description: "A comprehensive platform for building, testing, and deploying autonomous AI agents using LangGraph and AWS.",
-    technologies: ["React", "Python", "LangGraph", "AWS Bedrock", "FastAPI"],
-    githubUrl: "#",
-    liveUrl: "#",
+    id: "proj-3",
+    title: "Proptech - Smart Property Assistant",
+    description: "AI-powered real estate assistant featuring a hybrid Text-to-SQL and RAG pipeline. Includes an LLM-based Intent Router, semantic guardrails, and a modern split-pane responsive UI for instant visual feedback.",
+    technologies: ["Next.js", "Python", "FastAPI", "LangChain", "PostgreSQL", "pgvector", "Docker"],
+    githubUrl: "https://github.com/hannan-siddiqui/Proptech",
+    // liveUrl: "#",
+    detailedDescription: [
+      "A sophisticated multi-agent AI system that bridges the gap between structured databases and unstructured documents.",
+      "It features an LLM-based Intent Router that accurately classifies user inputs to execute either a secure, read-only PostgreSQL query for property listings, or a semantic search (RAG) for unstructured knowledge.",
+      "The UI is a modern, responsive split-pane dashboard with real-time state synchronization, giving users instant visual feedback."
+    ],
+    features: [
+      "Intelligent Query Routing distinguishing structured vs unstructured intent",
+      "Secure Text-to-SQL agent fetching property listings dynamically",
+      "Drag-and-Drop PDF system storing embeddings in pgvector",
+      "Semantic Guardrails to filter malicious/irrelevant queries",
+      "Split-pane responsive UI with Next.js 15 and Tailwind CSS"
+    ],
+    architecture: {
+      nodes: [
+        { id: "client", label: "Next.js UI", x: 6, y: 40 },
+        { id: "guardrails", label: "Semantic Guardrails", x: 22, y: 40 },
+        { id: "reject", label: "Blocked (Unsafe)", x: 22, y: 10 },
+        { id: "router", label: "Intent Router", x: 38, y: 40 },
+        { id: "sql", label: "Text-to-SQL", x: 54, y: 20 },
+        { id: "rag", label: "RAG Pipeline", x: 54, y: 60 },
+        { id: "pg", label: "PostgreSQL", x: 70, y: 20 },
+        { id: "vector", label: "Vector DB", x: 70, y: 60 },
+        { id: "cards", label: "Property Cards", x: 86, y: 20 },
+        { id: "text", label: "Text Response", x: 86, y: 60 },
+        { id: "pdf", label: "PDF Upload", x: 22, y: 85 },
+        { id: "parse", label: "Parsing", x: 38, y: 85 },
+        { id: "chunk", label: "Chunking", x: 54, y: 85 },
+        { id: "embed", label: "Embedding", x: 70, y: 85 }
+      ],
+      edges: [
+        { source: "client", target: "guardrails", label: "Query", animated: true },
+        { source: "client", target: "pdf", label: "Upload", animated: true },
+        { source: "guardrails", target: "router", label: "Safe", animated: true },
+        { source: "guardrails", target: "reject", label: "Unsafe", animated: true },
+        { source: "router", target: "sql", label: "Structured", animated: true },
+        { source: "router", target: "rag", label: "Unstructured", animated: true },
+        { source: "sql", target: "pg", animated: true },
+        { source: "rag", target: "vector", animated: true },
+        { source: "pg", target: "cards", label: "Result", animated: true },
+        { source: "vector", target: "text", label: "Result", animated: true },
+        { source: "pdf", target: "parse", animated: true },
+        { source: "parse", target: "chunk", animated: true },
+        { source: "chunk", target: "embed", animated: true },
+        { source: "embed", target: "vector", animated: true }
+      ]
+    }
   },
   {
     id: "proj-2",
     title: "RAG Document Analyzer",
     description: "Enterprise-grade Retrieval-Augmented Generation system for analyzing complex PDF documents with high accuracy.",
     technologies: ["Next.js", "FastApi", "TypeScript", "Vector DB", "OpenAI"],
-    githubUrl: "#"
+    githubUrl: "https://github.com/hannan-siddiqui/infuse",
+    detailedDescription: [
+      "An enterprise-grade document analysis tool that ingests massive corpora of PDF documents and provides precise answers using Retrieval-Augmented Generation.",
+      "The pipeline intelligently chunks and embeds text into a Vector DB, and utilizes advanced hybrid search to ensure high recall and accuracy when queried by users."
+    ],
+    features: [
+      "Drag-and-drop document upload and processing",
+      "Advanced chunking and semantic embedding generation",
+      "Hybrid search capabilities (Keyword + Vector)",
+      "Source attribution and confidence scoring for AI responses"
+    ],
+    architecture: {
+      nodes: [
+        // Document ingestion pipeline (top lane, y=15)
+        { id: "upload", label: "Document Upload", x: 6, y: 15 },
+        { id: "parse", label: "Parsing", x: 22, y: 15 },
+        { id: "chunk", label: "Chunking", x: 38, y: 15 },
+        { id: "embed_doc", label: "Embedding", x: 54, y: 15 },
+        { id: "vector", label: "Vector DB", x: 70, y: 15 },
+
+        // User query pipeline (bottom lane, y=75)
+        { id: "query", label: "User Query", x: 6, y: 75 },
+        { id: "embed_q", label: "Query Embedding", x: 22, y: 75 },
+        { id: "cosine", label: "Cosine Similarity", x: 38, y: 75 },
+        { id: "topk", label: "Top-K Results", x: 54, y: 75 },
+        { id: "llm", label: "LLM (OpenAI)", x: 70, y: 75 },
+        { id: "result", label: "Response", x: 88, y: 75 },
+
+        // Shared connection label
+        { id: "nextjs", label: "Next.js UI", x: 6, y: 45 }
+      ],
+      edges: [
+        // Ingestion flow
+        { source: "upload", target: "parse", animated: true },
+        { source: "parse", target: "chunk", animated: true },
+        { source: "chunk", target: "embed_doc", animated: true },
+        { source: "embed_doc", target: "vector", label: "Store", animated: true },
+
+        // Query flow
+        { source: "query", target: "embed_q", animated: true },
+        { source: "embed_q", target: "cosine", animated: true },
+        { source: "cosine", target: "topk", animated: true },
+        { source: "topk", target: "llm", label: "Context", animated: true },
+        { source: "llm", target: "result", animated: true },
+
+        // Cross-lane: Vector DB feeds cosine similarity
+        { source: "vector", target: "cosine", label: "Search", animated: true },
+
+        // UI connections
+        { source: "nextjs", target: "upload", label: "Upload", animated: true },
+        { source: "nextjs", target: "query", label: "Query", animated: true }
+      ]
+    }
   }
+  
 ];

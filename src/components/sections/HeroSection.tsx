@@ -1,131 +1,151 @@
 "use client";
 
-import { summary, personalInfo } from "@/data/portfolio";
+import { personalInfo } from "@/data/portfolio";
 import Image from "next/image";
 import hannanImg from "@/data/Hannan.jpg";
 import { motion } from "framer-motion";
-import { fadeInUp, staggerContainer } from "@/lib/animations";
-import { ArrowRight, Send, Sparkles } from "lucide-react";
+import { fadeInUp, slideInLeft, staggerContainer } from "@/lib/animations";
+import { ArrowRight, Send, Sparkles, ShieldCheck } from "lucide-react";
 import { FaGithub, FaLinkedin } from "react-icons/fa6";
 
 export default function HeroSection() {
   return (
     <section
       id="home"
-      className="min-h-screen flex flex-col justify-center pt-32 pb-20 relative overflow-hidden bg-[#0a0a0a]"
+      className="min-h-screen flex flex-col justify-center pt-32 pb-20 relative overflow-hidden bg-[#0a0a0c]"
     >
-      {/* Background Image with Dark Vignette & Radial Mask */}
-      <div className="absolute inset-0 pointer-events-none z-[2] overflow-hidden flex justify-center items-center">
-        <div 
-          className="relative w-full max-w-[700px] aspect-[3/4] sm:aspect-square opacity-30 mix-blend-luminosity scale-110"
-          style={{
-            maskImage: 'radial-gradient(ellipse at 50% 35%, black 25%, transparent 75%)',
-            WebkitMaskImage: 'radial-gradient(ellipse at 50% 35%, black 25%, transparent 75%)'
-          }}
-        >
-          <Image
-            src={hannanImg}
-            alt="Hannan"
-            fill
-            className="object-cover object-top filter contrast-125"
-            priority
-            sizes="(max-width: 1024px) 100vw, 700px"
-          />
-        </div>
-      </div>
-
-      {/* Centered Main Content Area */}
       <motion.div 
         variants={staggerContainer}
         initial="hidden"
         animate="visible"
-        className="max-w-[1200px] mx-auto w-full px-6 relative z-10 flex flex-col items-center text-center space-y-8 my-auto"
+        className="max-w-[1400px] mx-auto w-full px-6 relative z-10 grid lg:grid-cols-12 gap-12 lg:gap-16 items-center my-auto"
       >
         
-        {/* Status Badge */}
-        <motion.div variants={fadeInUp} className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-xs font-mono text-neutral-300 backdrop-blur-md">
-          <span className="w-2.5 h-2.5 rounded-full bg-red-500 animate-pulse" />
-          <span className="text-white font-medium">{personalInfo.availability}</span>
-        </motion.div>
-
-        {/* Title Header: HANNAN. with Glowing Text & Aura Effect */}
-        <motion.div variants={fadeInUp} className="space-y-4 max-w-4xl">
-          <div className="text-xs font-mono uppercase tracking-[0.4em] text-red-500 font-bold">
-            AI Engineer
+        {/* Left Content Area (7 Cols) */}
+        <motion.div variants={slideInLeft} className="lg:col-span-7 space-y-8 text-left">
+          
+          {/* Status Badge */}
+          <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-white/[0.04] border border-white/10 text-xs font-mono text-neutral-300 backdrop-blur-md">
+            <span className="w-2.5 h-2.5 rounded-full bg-red-500 animate-pulse" />
+            <span className="text-white font-medium">{personalInfo.availability}</span>
           </div>
 
-          <h1 
-            className="text-[clamp(3rem,11.5vw,8.5rem)] font-heading font-extrabold uppercase leading-none tracking-tight text-white select-none whitespace-nowrap"
-            style={{
-              filter: "drop-shadow(0 0 45px rgba(239, 68, 68, 0.45))",
-            }}
-          >
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-neutral-100 to-red-500">
-              Hannan
-            </span>
-            <span className="text-red-500">.</span>
-          </h1>
+          {/* Title Header */}
+          <div className="space-y-3">
+            <div className="flex items-center gap-3">
+              <span className="w-8 h-[2px] bg-red-500 block" />
+              <span className="text-xs font-mono uppercase tracking-[0.35em] text-red-500 font-bold">
+                01 // SOFTWARE / AI ENGINEER
+              </span>
+            </div>
+
+            <h1 
+              className="text-[clamp(3.5rem,7.5vw,7rem)] font-heading font-extrabold uppercase leading-[0.98] tracking-tight text-white select-none"
+              style={{
+                filter: "drop-shadow(0 0 35px rgba(239, 68, 68, 0.35))",
+              }}
+            >
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-neutral-100 to-red-500">
+                Hannan
+              </span>
+              <span className="text-red-500">.</span>
+            </h1>
+          </div>
+
+          {/* Bio Paragraph — Robotic AI Telemetry Font */}
+          <p className="text-xs sm:text-sm text-neutral-300 leading-relaxed font-['Chakra_Petch',sans-serif] tracking-wider max-w-2xl border-l-2 border-red-500/80 pl-4 py-1 bg-white/[0.01] rounded-r-lg">
+            Software/AI Engineer with <span className="text-white font-semibold underline decoration-red-500/60 underline-offset-4">2+ years of experience</span> building enterprise AI and full stack applications. Experienced in developing Generative AI and Agentic AI solutions with strong expertise in AWS, Azure, Microservices, and cloud native application development.
+          </p>
+
+          {/* Action CTAs & Social Links */}
+          <div className="flex flex-wrap items-center gap-4 pt-2">
+            <motion.a
+              whileHover={{ scale: 1.04 }}
+              whileTap={{ scale: 0.96 }}
+              href="#projects"
+              className="btn-accent px-9 py-4 text-xs tracking-wider rounded-xl shadow-xl shadow-red-500/25 group"
+            >
+              <span>Explore Projects</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform" />
+            </motion.a>
+
+            <motion.a
+              whileHover={{ scale: 1.04 }}
+              whileTap={{ scale: 0.96 }}
+              href={`mailto:${personalInfo.email}`}
+              className="btn-outline px-8 py-4 text-xs tracking-wider rounded-xl flex items-center gap-2 backdrop-blur-sm"
+            >
+              <Send className="w-4 h-4 text-red-500" />
+              <span>Get In Touch</span>
+            </motion.a>
+
+            {/* GitHub Link */}
+            <motion.a
+              whileHover={{ scale: 1.08, y: -2 }}
+              whileTap={{ scale: 0.92 }}
+              href={personalInfo.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="GitHub Profile"
+              className="p-4 rounded-xl bg-white/[0.04] border border-white/10 hover:border-red-500/50 hover:bg-red-500/10 text-white transition-all backdrop-blur-sm group"
+            >
+              <FaGithub className="w-4.5 h-4.5 group-hover:text-red-400 transition-colors" />
+            </motion.a>
+
+            {/* LinkedIn Link */}
+            <motion.a
+              whileHover={{ scale: 1.08, y: -2 }}
+              whileTap={{ scale: 0.92 }}
+              href={personalInfo.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="LinkedIn Profile"
+              className="p-4 rounded-xl bg-white/[0.04] border border-white/10 hover:border-red-500/50 hover:bg-red-500/10 text-white transition-all backdrop-blur-sm group"
+            >
+              <FaLinkedin className="w-4.5 h-4.5 group-hover:text-red-400 transition-colors" />
+            </motion.a>
+          </div>
+
         </motion.div>
 
-        {/* Bio Paragraph */}
-        <motion.p variants={fadeInUp} className="text-base sm:text-lg text-neutral-300 leading-relaxed font-light max-w-3xl">
-          Software/AI Engineer with <span className="text-white font-semibold">2+ years of experience</span> building enterprise AI and full stack applications. Experienced in developing Generative AI and Agentic AI solutions with strong expertise in AWS, Azure, Microservices, and cloud native application development.
-        </motion.p>
+        {/* Right Futuristic Portrait Card (5 Cols) */}
+        <motion.div variants={fadeInUp} className="lg:col-span-5 relative flex justify-center">
+          <div className="relative w-full max-w-[420px] aspect-[4/5] rounded-3xl p-3 bg-white/[0.02] border border-white/10 shadow-2xl hover:border-red-500/40 transition-all duration-500 group overflow-hidden">
+            
+            {/* Top Telemetry Chip */}
+            <div className="absolute top-6 left-6 right-6 z-20 flex items-center justify-between pointer-events-none">
+              <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-black/70 border border-white/15 text-[10px] font-mono text-neutral-300 backdrop-blur-md">
+                <ShieldCheck className="w-3.5 h-3.5 text-red-500" />
+                <span>AI ARCHITECT</span>
+              </div>
+            </div>
 
-        {/* Action CTAs & Social Links */}
-        <motion.div variants={fadeInUp} className="flex flex-wrap items-center justify-center gap-4 pt-2">
-          <motion.a
-            whileHover={{ scale: 1.04 }}
-            whileTap={{ scale: 0.96 }}
-            href="#projects"
-            className="btn-accent px-9 py-4 text-xs tracking-wider rounded-xl shadow-xl shadow-red-500/25 group"
-          >
-            <span>Explore Projects</span>
-            <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform" />
-          </motion.a>
+            {/* Image Container with Ambient Mask */}
+            <div className="relative w-full h-full rounded-2xl overflow-hidden">
+              <Image
+                src={hannanImg}
+                alt="Mohd Hannan Siddiqui"
+                fill
+                className="object-cover object-top filter contrast-110 group-hover:scale-105 transition-transform duration-700"
+                priority
+                sizes="(max-width: 1024px) 100vw, 420px"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0c] via-transparent to-transparent opacity-80" />
+            </div>
 
-          <motion.a
-            whileHover={{ scale: 1.04 }}
-            whileTap={{ scale: 0.96 }}
-            href={`mailto:${personalInfo.email}`}
-            className="btn-outline px-8 py-4 text-xs tracking-wider rounded-xl flex items-center gap-2 backdrop-blur-sm"
-          >
-            <Send className="w-4 h-4 text-red-500" />
-            <span>Get In Touch</span>
-          </motion.a>
+            {/* Bottom Floating Specialization Pill */}
+            <div className="absolute bottom-6 left-6 right-6 z-20">
+              <div className="p-4 rounded-2xl bg-[#0a0a0c]/90 border border-white/15 backdrop-blur-xl shadow-2xl space-y-1">
+                <div className="flex items-center gap-2 text-xs font-heading font-bold text-white">
+                  <Sparkles className="w-4 h-4 text-red-500" />
+                  <span>2+ Years Experience</span>
+                </div>
+                <p className="text-[11px] font-mono text-neutral-400">
+                  Agentic Workflows • RAG • AWS & Azure
+                </p>
+              </div>
+            </div>
 
-          {/* GitHub Link */}
-          <motion.a
-            whileHover={{ scale: 1.08, y: -2 }}
-            whileTap={{ scale: 0.92 }}
-            href={personalInfo.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="GitHub Profile"
-            className="p-4 rounded-xl bg-white/[0.04] border border-white/10 hover:border-red-500/50 hover:bg-red-500/10 text-white transition-all backdrop-blur-sm group"
-          >
-            <FaGithub className="w-4.5 h-4.5 group-hover:text-red-400 transition-colors" />
-          </motion.a>
-
-          {/* LinkedIn Link */}
-          <motion.a
-            whileHover={{ scale: 1.08, y: -2 }}
-            whileTap={{ scale: 0.92 }}
-            href={personalInfo.linkedin}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="LinkedIn Profile"
-            className="p-4 rounded-xl bg-white/[0.04] border border-white/10 hover:border-red-500/50 hover:bg-red-500/10 text-white transition-all backdrop-blur-sm group"
-          >
-            <FaLinkedin className="w-4.5 h-4.5 group-hover:text-red-400 transition-colors" />
-          </motion.a>
-        </motion.div>
-
-        {/* Bottom Feature Pill Badge */}
-        <motion.div variants={fadeInUp} className="pt-6">
-          <div className="inline-flex items-center gap-3 px-5 py-2.5 rounded-2xl bg-white/[0.03] border border-white/10 backdrop-blur-md text-xs font-mono text-neutral-400">
-            <Sparkles className="w-4 h-4 text-red-500" />
-            <span>2+ Years Building Enterprise AI & Full Stack Applications</span>
           </div>
         </motion.div>
 

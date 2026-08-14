@@ -17,7 +17,7 @@ export const personalInfo = {
   phone: "(+91) 7497932064",
   linkedin: "https://www.linkedin.com/in/mohd-hannan-siddiqui-22560a406",
   linkedinHandle: "in/mohd-hannan-siddiqui-22560a406",
-  github: "https://github.com/mohdhannan",
+  github: "https://github.com/hannan-siddiqui",
   location: "India",
   resumeUrl: "/resume.pdf",
   availability: "Open to opportunities",
@@ -119,6 +119,7 @@ export const skills: SkillCategory[] = [
     color: "#06b6d4",
     skills: [
       { name: "AWS", proficiency: 90 },
+      { name: "Azure", proficiency: 90 },
       { name: "Docker", proficiency: 88 },
       { name: "CI/CD", proficiency: 85 },
       { name: "GitHub Actions", proficiency: 87 },
@@ -227,39 +228,6 @@ export interface Project {
 }
 
 export const projects: Project[] = [
-  // {
-  //   id: "proj-1",
-  //   title: "AI Agent Platform",
-  //   description: "A comprehensive platform for building, testing, and deploying autonomous AI agents using LangGraph and AWS.",
-  //   technologies: ["React", "Python", "LangGraph", "AWS Bedrock", "FastAPI"],
-  //   githubUrl: "#",
-  //   liveUrl: "#",
-  //   detailedDescription: [
-  //     "A comprehensive platform designed to democratize the creation and deployment of autonomous AI agents.",
-  //     "By leveraging LangGraph for stateful multi-actor workflows and AWS Bedrock for scalable foundation models, the system allows developers to build, evaluate, and monitor complex Agentic AI systems with a visual graph approach."
-  //   ],
-  //   features: [
-  //     "Visual Agent Builder with React and interactive node graphs",
-  //     "Stateful workflows and orchestration powered by LangGraph",
-  //     "Seamless integration with AWS Bedrock for multiple LLM choices",
-  //     "Real-time logging and tracing for agent debugging"
-  //   ],
-  //   architecture: {
-  //     nodes: [
-  //       { id: "ui", label: "React UI", x: 15, y: 50 },
-  //       { id: "api", label: "FastAPI Backend", x: 40, y: 50 },
-  //       { id: "agent", label: "LangGraph Orchestrator", x: 65, y: 25 },
-  //       { id: "aws", label: "AWS Bedrock", x: 85, y: 50 }
-  //     ],
-  //     edges: [
-  //       { source: "ui", target: "api", animated: true },
-  //       { source: "api", target: "agent", animated: true },
-  //       { source: "agent", target: "aws", animated: true },
-  //       { source: "aws", target: "agent", animated: true },
-  //       { source: "agent", target: "api", animated: true }
-  //     ]
-  //   }
-  // },
   {
     id: "proj-3",
     title: "Proptech - Smart Property Assistant",
@@ -373,5 +341,5 @@ export const projects: Project[] = [
       ]
     }
   }
-  
+
 ];

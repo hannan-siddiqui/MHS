@@ -36,13 +36,13 @@
 
   body {
     font-family: 'Inter', system-ui, sans-serif;
-    background-color: #111111;
-    color: #a3a3a3; /* neutral-400 */
+    background-color: #08080a;
+    color: #d4d4d8;
     overflow-x: hidden;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Syne', sans-serif;
+    font-family: 'Outfit', 'Plus Jakarta Sans', system-ui, sans-serif;
     color: #ffffff;
   }
 
@@ -74,7 +74,7 @@
   .btn-accent {
     background-color: #ffffff;
     color: #111111;
-    font-family: 'Syne', sans-serif;
+    font-family: 'Outfit', sans-serif;
     font-weight: 700;
     text-transform: uppercase;
     transition: all 0.3s ease;
@@ -92,7 +92,7 @@
   .btn-outline {
     background-color: transparent;
     color: #ffffff;
-    font-family: 'Syne', sans-serif;
+    font-family: 'Outfit', sans-serif;
     font-weight: 700;
     text-transform: uppercase;
     border: 1px solid rgba(255, 255, 255, 0.2);
@@ -128,7 +128,7 @@
 
 @theme {
   --font-sans: 'Inter', system-ui, sans-serif;
-  --font-heading: 'Syne', sans-serif;
+  --font-heading: 'Outfit', 'Plus Jakarta Sans', sans-serif;
   --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
   
   --animate-marquee: marquee 10s linear infinite;

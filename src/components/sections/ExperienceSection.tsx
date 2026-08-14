@@ -7,24 +7,32 @@ import { fadeInUp, slideInLeft, staggerContainer } from "@/lib/animations";
 
 export default function ExperienceSection() {
   return (
-    <section id="experience" className="py-24 relative bg-[#111111]">
+    <section id="experience" className="py-28 relative bg-[#0a0a0c] border-b border-white/10 overflow-hidden">
       <motion.div 
         variants={staggerContainer}
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
-        className="max-w-[1400px] mx-auto px-6 relative z-10"
+        className="max-w-[1400px] mx-auto px-6 relative z-10 space-y-16"
       >
         
         {/* Section header */}
-        <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row sm:items-end justify-between mb-16 gap-6">
-          <h2 className="text-4xl sm:text-5xl font-heading font-extrabold text-white">
-            My Experience
-            <br />
-            <span className="text-xl sm:text-2xl font-sans font-light text-neutral-400 normal-case mt-2 block">
-              Professional Journey
-            </span>
-          </h2>
+        <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row sm:items-end justify-between gap-6">
+          <div className="space-y-3">
+            <div className="flex items-center gap-3">
+              <span className="w-8 h-[2px] bg-red-500 block" />
+              <span className="text-xs font-mono text-red-500 uppercase tracking-widest font-bold">
+                04 // CAREER HISTORY
+              </span>
+            </div>
+
+            <h2 className="text-4xl sm:text-5xl font-heading font-extrabold text-white">
+              Professional Experience <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-neutral-300 to-red-500">
+                & Track Record
+              </span>
+            </h2>
+          </div>
         </motion.div>
 
         {/* Cards container */}

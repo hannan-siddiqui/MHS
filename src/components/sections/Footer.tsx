@@ -4,7 +4,7 @@ import { personalInfo } from "@/data/portfolio";
 
 export default function Footer() {
   return (
-    <footer className="border-t border-white/10 bg-[#111111] pt-16 pb-8">
+    <footer className="border-t border-white/10 bg-[#050507] pt-16 pb-8">
       <div className="max-w-[1400px] mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16">
           

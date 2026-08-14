@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { siteConfig } from "@/data/portfolio";
+import AIBackgroundParallax from "@/components/ui/AIBackgroundParallax";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -54,11 +55,14 @@ export default function RootLayout({
           crossOrigin="anonymous"
         />
         <link
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=JetBrains+Mono:wght@300;400;500;600&family=Syne:wght@400..800&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;600&family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
           rel="stylesheet"
         />
       </head>
-      <body className="min-h-screen antialiased">{children}</body>
+      <body className="min-h-screen antialiased bg-[#0a0a0a] text-neutral-400 relative">
+        <AIBackgroundParallax />
+        {children}
+      </body>
     </html>
   );
 }

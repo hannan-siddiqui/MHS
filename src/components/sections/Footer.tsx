@@ -1,6 +1,7 @@
 "use client";
 
 import { personalInfo } from "@/data/portfolio";
+import Link from "next/link";
 
 export default function Footer() {
   return (
@@ -10,13 +11,13 @@ export default function Footer() {
           
           {/* Column 1: Brand & Contact Info */}
           <div className="md:col-span-1">
-             <a
+             <Link
               href="/"
               className="text-2xl font-heading font-bold uppercase tracking-widest text-white hover:text-accent transition-colors flex items-center mb-6"
             >
               {personalInfo.firstName + " " + personalInfo.lastName}
               <span className="text-accent">.</span>
-            </a>
+            </Link>
             <div className="text-xs text-neutral-500 font-semibold uppercase tracking-widest mb-2">
               Contact Information:
             </div>

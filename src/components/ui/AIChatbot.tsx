@@ -45,16 +45,28 @@ export default function AIChatbot() {
   const generateResponse = (query: string): string => {
     const q = query.toLowerCase();
 
+    if (q.includes("hypercart")) {
+      return `⚡ HyperCart AI is an Autonomous Multi-Agent E-Commerce Operating System featuring:\n• Dynamic Text-to-SQL intent routing with wildcard matching\n• Structured product schema generation with Pydantic v2\n• 1536-dim pgvector RAG for grounded customer support\n• Human-in-the-Loop governance & audit queue\n• Avant-Garde Acid Void UI in Next.js 14.`;
+    }
+
+    if (q.includes("proptech") || q.includes("property") || q.includes("real estate")) {
+      return `🏠 Proptech is a Smart Real Estate Assistant featuring:\n• LLM Zero-Shot Intent Router (Relational vs Semantic)\n• Secure parameterized Text-to-SQL for dynamic MLS property listings\n• pgvector RAG for PDF deed & HOA policy Q&A\n• Semantic threat guardrails & split-pane interactive UI.`;
+    }
+
+    if (q.includes("infuse") || q.includes("document analyzer") || q.includes("pdf") || q.includes("analyzer")) {
+      return `📄 Infuse is an Enterprise RAG Document Analyzer featuring:\n• Hierarchical token-aware PDF chunking with layout preservation\n• Dense + Sparse Hybrid Search with reciprocal rank fusion\n• Strict citation guardrails ensuring zero hallucination\n• Real-time SSE token streaming dashboard.`;
+    }
+
     if (q.includes("expertise") || q.includes("skills") || q.includes("stack") || q.includes("technologies")) {
-      return `Hannan is a Software/AI Engineer with 2+ years of experience. His core tech stack includes:\n• Agentic AI: LangGraph, LangChain, Multi-Agent Workflows, Guardrails\n• Generative AI: RAG Pipelines, AWS Bedrock, Azure OpenAI, pgvector\n• Full Stack & Cloud: Next.js 15, React.js, FastAPI, Node.js, AWS Microservices, Docker, PostgreSQL.`;
+      return `Hannan is a Software/AI Engineer with 2+ years of experience. His core tech stack includes:\n• Agentic AI: LangGraph, LangChain, Multi-Agent Workflows, Guardrails, Pydantic v2\n• Generative AI: Dynamic Text-to-SQL, RAG Pipelines, pgvector, AWS Bedrock, Azure OpenAI\n• Full Stack & Cloud: Next.js 14/15, React.js, FastAPI, Node.js, AWS Microservices, Docker, PostgreSQL.`;
     }
 
     if (q.includes("rag") || q.includes("agent") || q.includes("langgraph") || q.includes("ai")) {
-      return `Yes! Hannan is a specialist in Agentic AI & Enterprise RAG. He has architected stateful multi-agent graphs with LangGraph, LLM-based intent routers, semantic guardrails, and hybrid vector search pipelines with pgvector & AWS Bedrock.`;
+      return `Yes! Hannan specializes in Agentic AI & Enterprise RAG. His featured systems include:\n1. HyperCart AI (Multi-Agent E-Commerce OS with Text-to-SQL & HITL Gate)\n2. Proptech Smart Assistant (Intent Routing & MLS Text-to-SQL)\n3. Infuse Document Analyzer (Hierarchical RAG & Hybrid Search)\nAll systems feature strict safety guardrails and pgvector embeddings!`;
     }
 
     if (q.includes("project") || q.includes("work") || q.includes("portfolio")) {
-      return `Hannan's top featured projects include:\n1. 🏠 Proptech - Smart Property Assistant (Text-to-SQL + RAG Intent Router)\n2. 📄 RAG Document Analyzer (Enterprise PDF ingestion & vector hybrid search)\nClick on any project in the portfolio to view interactive architecture diagrams!`;
+      return `Hannan's top featured projects include:\n1. ⚡ HyperCart AI — Autonomous Multi-Agent E-Commerce OS\n2. 🏠 Proptech — Smart Property Assistant (Text-to-SQL + RAG Intent Router)\n3. 📄 Infuse — Enterprise RAG Document Analyzer (Hybrid Vector Search)\nClick on any project in the portfolio to view interactive architecture diagrams!`;
     }
 
     if (q.includes("contact") || q.includes("hire") || q.includes("email") || q.includes("reach")) {

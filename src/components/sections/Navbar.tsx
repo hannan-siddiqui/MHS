@@ -3,9 +3,13 @@
 import { useState } from "react";
 import { navigation, personalInfo } from "@/data/portfolio";
 import { motion, AnimatePresence } from "framer-motion";
+import { useRouter, usePathname } from "next/navigation";
+import Link from "next/link";
 
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const router = useRouter();
+  const pathname = usePathname();
 
   const handleNavClick = (e: React.MouseEvent, href: string) => {
     e.preventDefault();
@@ -20,42 +24,51 @@ export default function Navbar() {
     }
 
     const targetId = href.replace(/^[\/#]+/, "");
+    const isHomePage = pathname === "/" || pathname === "";
 
-    // Defer scroll calculation slightly so touch unmount sequence doesn't block scroll
-    setTimeout(() => {
-      if (targetId === "home") {
-        window.scrollTo({ top: 0, behavior: "smooth" });
-        return;
+    // If on a project page or any non-home route, redirect to home
+    if (!isHomePage) {
+      if (targetId === "home" || !targetId) {
+        router.push("/");
+      } else {
+        router.push(`/#${targetId}`);
       }
+      return;
+    }
 
-      const element = document.getElementById(targetId);
-      if (element) {
-        const navOffset = 80;
-        const elementPosition = element.getBoundingClientRect().top;
-        const offsetPosition = elementPosition + window.pageYOffset - navOffset;
+    // If already on home page, scroll to target section
+    if (targetId === "home" || !targetId) {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      return;
+    }
 
-        window.scrollTo({
-          top: offsetPosition,
-          behavior: "smooth",
-        });
-      } else if (typeof window !== "undefined") {
-        window.location.href = `/${href}`;
-      }
-    }, 50);
+    const element = document.getElementById(targetId);
+    if (element) {
+      const navOffset = 80;
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - navOffset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth",
+      });
+    } else {
+      router.push(`/#${targetId}`);
+    }
   };
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-[#0a0a0c]/85 backdrop-blur-xl border-b border-white/10 transition-all duration-300">
       <div className="max-w-[1400px] mx-auto px-6 py-5 flex items-center justify-between">
         {/* Logo */}
-        <a
-          href="/#home"
+        <Link
+          href="/"
           onClick={(e) => handleNavClick(e, "#home")}
           className="text-2xl font-heading font-bold uppercase tracking-widest text-white hover:text-red-500 transition-colors flex items-center"
         >
           {personalInfo.lastName}
           <span className="text-red-500">.</span>
-        </a>
+        </Link>
 
         {/* Desktop Nav - Centered */}
         <div className="hidden md:flex items-center gap-10 absolute left-1/2 -translate-x-1/2">

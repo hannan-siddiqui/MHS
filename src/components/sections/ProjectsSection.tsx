@@ -49,7 +49,7 @@ export default function ProjectsSection() {
               variants={fadeInUp}
               key={project.id}
               onClick={() => router.push(`/project/${project.id}`)}
-              className="wireframe-box p-8 rounded-2xl bg-[#111111]/80 border border-white/10 hover:border-red-500/50 transition-all duration-300 group flex flex-col justify-between cursor-pointer backdrop-blur-md shadow-2xl relative overflow-hidden"
+              className="wireframe-box p-8 rounded-2xl bg-[#111111]/80 border border-white/10 hover:border-red-500/50 transition-all duration-300 group flex flex-col justify-between cursor-pointer backdrop-blur-md shadow-2xl relative overflow-hidden h-full"
             >
               <div>
                 {/* Top Bar: Index & Links */}

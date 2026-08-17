@@ -5,6 +5,7 @@ import { navigation, personalInfo } from "@/data/portfolio";
 import { motion, AnimatePresence } from "framer-motion";
 import { useRouter, usePathname } from "next/navigation";
 import Link from "next/link";
+import { Cpu, Terminal, ShieldCheck } from "lucide-react";
 
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -13,9 +14,6 @@ export default function Navbar() {
 
   const handleNavClick = (e: React.MouseEvent, href: string) => {
     e.preventDefault();
-    e.stopPropagation();
-
-    // Close mobile dropdown
     setMobileOpen(false);
 
     if (href.startsWith("mailto:")) {
@@ -26,7 +24,6 @@ export default function Navbar() {
     const targetId = href.replace(/^[\/#]+/, "");
     const isHomePage = pathname === "/" || pathname === "";
 
-    // If on a project page or any non-home route, redirect to home
     if (!isHomePage) {
       if (targetId === "home" || !targetId) {
         router.push("/");
@@ -36,116 +33,120 @@ export default function Navbar() {
       return;
     }
 
-    // If already on home page, scroll to target section
-    if (targetId === "home" || !targetId) {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-      return;
-    }
+    // Smooth scroll to section after closing mobile drawer
+    setTimeout(() => {
+      if (targetId === "home" || !targetId) {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+        return;
+      }
 
-    const element = document.getElementById(targetId);
-    if (element) {
-      const navOffset = 80;
-      const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - navOffset;
-
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: "smooth",
-      });
-    } else {
-      router.push(`/#${targetId}`);
-    }
+      const element = document.getElementById(targetId);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth", block: "start" });
+      } else {
+        router.push(`/#${targetId}`);
+      }
+    }, 100);
   };
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-[#0a0a0c]/85 backdrop-blur-xl border-b border-white/10 transition-all duration-300">
-      <div className="max-w-[1400px] mx-auto px-6 py-5 flex items-center justify-between">
-        {/* Logo */}
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-[#e4e7ec]/90 backdrop-blur-md border-b border-[#cbd1dc] transition-all duration-300">
+      <div className="max-w-[1440px] mx-auto px-6 py-4 flex items-center justify-between">
+        
+        {/* Hardware Stamped Brand Logo */}
         <Link
           href="/"
           onClick={(e) => handleNavClick(e, "#home")}
-          className="text-2xl font-heading font-bold uppercase tracking-widest text-white hover:text-red-500 transition-colors flex items-center"
+          className="flex items-center gap-3 group cursor-pointer"
         >
-          {personalInfo.lastName}
-          <span className="text-red-500">.</span>
+          <div className="w-8 h-8 rounded-xl neu-raised flex items-center justify-center text-neutral-800 group-hover:text-red-500 transition-colors">
+            <Cpu className="w-4 h-4" />
+          </div>
+          <div>
+            <div className="text-base font-heading font-extrabold tracking-wider text-neutral-900 flex items-center gap-1">
+              <span>{personalInfo.firstName} {personalInfo.lastName}</span>
+              <span className="w-1.5 h-1.5 rounded-full led-red ml-1" />
+            </div>
+            <div className="text-[10px] font-mono text-neutral-500 uppercase tracking-widest leading-none font-semibold">
+              AI Engineer
+            </div>
+          </div>
         </Link>
 
-        {/* Desktop Nav - Centered */}
-        <div className="hidden md:flex items-center gap-10 absolute left-1/2 -translate-x-1/2">
-          {navigation.map((item) => (
+        {/* Desktop Flush Minimalist Hardware Tabs */}
+        <div className="hidden md:flex items-center gap-8">
+          {navigation.map((item, idx) => (
             <a
               key={item.href}
               href={`/${item.href}`}
               onClick={(e) => handleNavClick(e, item.href)}
-              className="text-xs font-semibold uppercase tracking-[0.2em] text-neutral-400 hover:text-white transition-colors cursor-pointer"
+              className="text-xs font-mono font-bold uppercase tracking-wider text-neutral-600 hover:text-neutral-950 transition-colors cursor-pointer flex items-center gap-1.5 group"
             >
-              {item.label}
+              <span className="text-[10px] text-neutral-400 group-hover:text-red-500 font-normal">
+                0{idx + 1}.
+              </span>
+              <span>{item.label}</span>
             </a>
           ))}
         </div>
 
-        {/* CTA - Right */}
-        <div className="hidden md:block">
-           <a
+        {/* Right Telemetry LED Indicator & Action CTA */}
+        <div className="hidden md:flex items-center gap-4">
+          <div className="px-3 py-1.5 rounded-lg neu-inset flex items-center gap-2 text-[10px] font-mono text-neutral-600">
+            <span className="w-2 h-2 rounded-full led-green" />
+            <span className="font-semibold text-neutral-700">SYS_ONLINE : 200 OK</span>
+          </div>
+
+          <a
             href={`mailto:${personalInfo.email}`}
-            className="btn-outline px-6 py-2.5 text-xs rounded-full"
+            className="neu-button-primary px-5 py-2.5 text-xs rounded-xl cursor-pointer"
           >
-            Contact Me <span className="text-red-500 font-sans">+</span>
+            <span>GET IN TOUCH</span>
           </a>
         </div>
 
-        {/* Mobile hamburger */}
+        {/* Mobile Hamburger Button */}
         <button
           type="button"
           onClick={() => setMobileOpen(!mobileOpen)}
-          className="md:hidden text-xs uppercase tracking-widest text-neutral-400 hover:text-white transition-colors cursor-pointer bg-transparent border-none py-2 px-3 rounded-lg hover:bg-white/5"
+          className="md:hidden px-3.5 py-2 rounded-xl neu-raised text-xs font-mono font-bold uppercase tracking-wider text-neutral-700 hover:text-red-500 transition-all cursor-pointer"
           aria-label="Toggle menu"
         >
           {mobileOpen ? "CLOSE" : "MENU"}
         </button>
       </div>
 
-      {/* Mobile Menu with Framer Motion AnimatePresence Open/Close Transitions */}
+      {/* Mobile Drawer */}
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-            className="md:hidden border-t border-white/10 bg-[#0a0a0c]/95 backdrop-blur-xl absolute w-full left-0 right-0 overflow-hidden shadow-2xl z-50"
+            transition={{ duration: 0.25 }}
+            className="md:hidden border-t border-[#cbd1dc] bg-[#e4e7ec] shadow-xl overflow-hidden"
           >
-            <motion.div 
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.2, delay: 0.05 }}
-              className="px-6 py-8 flex flex-col items-center gap-6"
-            >
+            <div className="px-6 py-6 flex flex-col gap-4">
               {navigation.map((item, idx) => (
-                <motion.a
-                  initial={{ opacity: 0, y: -5 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.04 * idx }}
+                <a
                   key={item.href}
                   href={`/${item.href}`}
                   onClick={(e) => handleNavClick(e, item.href)}
-                  className="text-sm font-semibold uppercase tracking-[0.2em] text-neutral-300 hover:text-red-500 transition-colors cursor-pointer py-2 px-4 w-full text-center active:text-red-500"
+                  className="px-4 py-3 rounded-xl neu-raised text-xs font-mono font-bold uppercase tracking-wider text-neutral-800 flex items-center justify-between"
                 >
-                  {item.label}
-                </motion.a>
+                  <span>{item.label}</span>
+                  <span className="text-red-500 font-mono text-[10px]">0{idx + 1}</span>
+                </a>
               ))}
-              <motion.a
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.2 }}
+
+              <a
                 href={`mailto:${personalInfo.email}`}
                 onClick={(e) => handleNavClick(e, `mailto:${personalInfo.email}`)}
-                className="btn-accent px-8 py-3.5 text-xs tracking-wider rounded-xl w-full mt-2 text-center block"
+                className="neu-button-primary px-6 py-3.5 text-xs rounded-xl w-full text-center mt-2"
               >
-                Contact Me <span className="font-sans text-sm ml-1">+</span>
-              </motion.a>
-            </motion.div>
+                GET IN TOUCH
+              </a>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>

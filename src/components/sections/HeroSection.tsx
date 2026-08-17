@@ -1,155 +1,420 @@
 "use client";
 
+import React, { useState, useRef } from "react";
 import { personalInfo } from "@/data/portfolio";
-import Image from "next/image";
-import hannanImg from "@/data/Hannan.jpg";
-import { motion } from "framer-motion";
-import { fadeInUp, slideInLeft, staggerContainer } from "@/lib/animations";
-import { ArrowRight, Send, Sparkles, ShieldCheck } from "lucide-react";
-import { FaGithub, FaLinkedin } from "react-icons/fa6";
+import { motion, AnimatePresence } from "framer-motion";
+import { 
+  Bot, 
+  Brain, 
+  Cloud, 
+  Database, 
+  Sparkles, 
+  Terminal, 
+  Grid, 
+  Sliders, 
+  ChevronRight, 
+  ChevronLeft,
+  Send,
+  Check,
+  Activity,
+  Code2,
+  ArrowRight,
+  ShieldCheck,
+  Layers,
+  Cpu
+} from "lucide-react";
+import CircuitWireBus from "@/components/ui/CircuitWireBus";
+import Typewriter from "@/components/ui/Typewriter";
+import ScrambleText from "@/components/ui/ScrambleText";
+import { FaLinkedin, FaGithub } from "react-icons/fa6";
 
 export default function HeroSection() {
+  const [activeTab, setActiveTab] = useState<"rag" | "agent" | "cloud">("agent");
+  const [toggleCloud, setToggleCloud] = useState(true);
+  const [earlyAccessOpen, setEarlyAccessOpen] = useState(false);
+  const [userEmail, setUserEmail] = useState("");
+  const [submitted, setSubmitted] = useState(false);
+
+  // Refs for Pixel-Perfect Dynamic Wire Bus Connections
+  const containerRef = useRef<HTMLDivElement>(null);
+  const leftCard1Ref = useRef<HTMLDivElement>(null);
+  const leftCard2Ref = useRef<HTMLDivElement>(null);
+  const leftCard3Ref = useRef<HTMLDivElement>(null);
+  const centerPanelRef = useRef<HTMLDivElement>(null);
+  const rightCard1Ref = useRef<HTMLDivElement>(null);
+  const rightCard2Ref = useRef<HTMLDivElement>(null);
+  const rightCard3Ref = useRef<HTMLDivElement>(null);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!userEmail.trim()) return;
+    setSubmitted(true);
+    setTimeout(() => {
+      setSubmitted(false);
+      setEarlyAccessOpen(false);
+      setUserEmail("");
+    }, 2500);
+  };
+
   return (
     <section
       id="home"
-      className="min-h-screen flex flex-col justify-center pt-32 pb-20 relative overflow-hidden bg-[#0a0a0c]"
+      className="min-h-screen flex flex-col justify-center pt-28 pb-16 relative overflow-hidden bg-[#e4e7ec]"
     >
-      <motion.div 
-        variants={staggerContainer}
-        initial="hidden"
-        animate="visible"
-        className="max-w-[1400px] mx-auto w-full px-6 relative z-10 grid lg:grid-cols-12 gap-12 lg:gap-16 items-center my-auto"
+      <div 
+        ref={containerRef}
+        className="max-w-[1440px] mx-auto w-full px-4 sm:px-6 relative z-10 my-auto space-y-8"
       >
-        
-        {/* Left Content Area (7 Cols) */}
-        <motion.div variants={slideInLeft} className="lg:col-span-7 space-y-8 text-left">
+        {/* Animated Dynamic Circuit Wire Busses with Pixel-Perfect Precision */}
+        <CircuitWireBus
+          containerRef={containerRef}
+          leftCardRefs={[leftCard1Ref, leftCard2Ref, leftCard3Ref]}
+          centerRef={centerPanelRef}
+          rightCardRefs={[rightCard1Ref, rightCard2Ref, rightCard3Ref]}
+        />
+
+        {/* Main 3-Column Industrial Hardware Grid */}
+        <div className="grid lg:grid-cols-12 gap-6 items-center">
           
-          {/* Status Badge */}
-          <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-white/[0.04] border border-white/10 text-xs font-mono text-neutral-300 backdrop-blur-md">
-            <span className="w-2.5 h-2.5 rounded-full bg-red-500 animate-pulse" />
-            <span className="text-white font-medium">{personalInfo.availability}</span>
-          </div>
-
-          {/* Title Header */}
-          <div className="space-y-3">
-            <div className="flex items-center gap-3">
-              <span className="w-8 h-[2px] bg-red-500 block" />
-              <span className="text-xs font-mono uppercase tracking-[0.35em] text-red-500 font-bold">
-                01 // SOFTWARE / AI ENGINEER
-              </span>
+          {/* =============================================================== */}
+          {/* 1. LEFT SIDE PANEL: AI & INTELLIGENCE EXPERTISE (3 COLS)        */}
+          {/* =============================================================== */}
+          <div className="order-2 lg:order-1 lg:col-span-3 flex flex-col gap-4 z-10">
+            <div className="text-[10px] font-mono text-neutral-500 uppercase tracking-widest px-1 font-bold flex items-center gap-1.5">
+              <span className="w-1.5 h-1.5 rounded-full led-red" />
+              <span>AI & ML EXPERTISE</span>
             </div>
 
-            <h1 
-              className="text-[clamp(3.5rem,7.5vw,7rem)] font-heading font-extrabold uppercase leading-[0.98] tracking-tight text-white select-none"
-              style={{
-                filter: "drop-shadow(0 0 35px rgba(239, 68, 68, 0.35))",
-              }}
+            {/* Expertise Card 1: Generative AI & Enterprise RAG */}
+            <motion.div
+              ref={leftCard1Ref}
+              whileHover={{ y: -2 }}
+              className="p-4 rounded-2xl neu-raised cursor-pointer group flex flex-col justify-between min-h-[125px] relative"
             >
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-neutral-100 to-red-500">
-                Hannan
-              </span>
-              <span className="text-red-500">.</span>
-            </h1>
-          </div>
-
-          {/* Bio Paragraph — Robotic AI Telemetry Font */}
-          <p className="text-xs sm:text-sm text-neutral-300 leading-relaxed font-['Chakra_Petch',sans-serif] tracking-wider max-w-2xl border-l-2 border-red-500/80 pl-4 py-1 bg-white/[0.01] rounded-r-lg">
-            Software/AI Engineer with <span className="text-white font-semibold underline decoration-red-500/60 underline-offset-4">2+ years of experience</span> building enterprise AI and full stack applications. Experienced in developing Generative AI and Agentic AI solutions with strong expertise in AWS, Azure, Microservices, and cloud native application development.
-          </p>
-
-          {/* Action CTAs & Social Links */}
-          <div className="flex flex-wrap items-center gap-4 pt-2">
-            <motion.a
-              whileHover={{ scale: 1.04 }}
-              whileTap={{ scale: 0.96 }}
-              href="#projects"
-              className="btn-accent px-9 py-4 text-xs tracking-wider rounded-xl shadow-xl shadow-red-500/25 group"
-            >
-              <span>Explore Projects</span>
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform" />
-            </motion.a>
-
-            <motion.a
-              whileHover={{ scale: 1.04 }}
-              whileTap={{ scale: 0.96 }}
-              href={`mailto:${personalInfo.email}`}
-              className="btn-outline px-8 py-4 text-xs tracking-wider rounded-xl flex items-center gap-2 backdrop-blur-sm"
-            >
-              <Send className="w-4 h-4 text-red-500" />
-              <span>Get In Touch</span>
-            </motion.a>
-
-            {/* GitHub Link */}
-            <motion.a
-              whileHover={{ scale: 1.08, y: -2 }}
-              whileTap={{ scale: 0.92 }}
-              href={personalInfo.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="GitHub Profile"
-              className="p-4 rounded-xl bg-white/[0.04] border border-white/10 hover:border-red-500/50 hover:bg-red-500/10 text-white transition-all backdrop-blur-sm group"
-            >
-              <FaGithub className="w-4.5 h-4.5 group-hover:text-red-400 transition-colors" />
-            </motion.a>
-
-            {/* LinkedIn Link */}
-            <motion.a
-              whileHover={{ scale: 1.08, y: -2 }}
-              whileTap={{ scale: 0.92 }}
-              href={personalInfo.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="LinkedIn Profile"
-              className="p-4 rounded-xl bg-white/[0.04] border border-white/10 hover:border-red-500/50 hover:bg-red-500/10 text-white transition-all backdrop-blur-sm group"
-            >
-              <FaLinkedin className="w-4.5 h-4.5 group-hover:text-red-400 transition-colors" />
-            </motion.a>
-          </div>
-
-        </motion.div>
-
-        {/* Right Futuristic Portrait Card (5 Cols) */}
-        <motion.div variants={fadeInUp} className="lg:col-span-5 relative flex justify-center">
-          <div className="relative w-full max-w-[420px] aspect-[4/5] rounded-3xl p-3 bg-white/[0.02] border border-white/10 shadow-2xl hover:border-red-500/40 transition-all duration-500 group overflow-hidden">
-            
-            {/* Top Telemetry Chip */}
-            <div className="absolute top-6 left-6 right-6 z-20 flex items-center justify-between pointer-events-none">
-              <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-black/70 border border-white/15 text-[10px] font-mono text-neutral-300 backdrop-blur-md">
-                <ShieldCheck className="w-3.5 h-3.5 text-red-500" />
-                <span>AI ARCHITECT</span>
-              </div>
-            </div>
-
-            {/* Image Container with Ambient Mask */}
-            <div className="relative w-full h-full rounded-2xl overflow-hidden">
-              <Image
-                src={hannanImg}
-                alt="Mohd Hannan Siddiqui"
-                fill
-                className="object-cover object-top filter contrast-110 group-hover:scale-105 transition-transform duration-700"
-                priority
-                sizes="(max-width: 1024px) 100vw, 420px"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0c] via-transparent to-transparent opacity-80" />
-            </div>
-
-            {/* Bottom Floating Specialization Pill */}
-            <div className="absolute bottom-6 left-6 right-6 z-20">
-              <div className="p-4 rounded-2xl bg-[#0a0a0c]/90 border border-white/15 backdrop-blur-xl shadow-2xl space-y-1">
-                <div className="flex items-center gap-2 text-xs font-heading font-bold text-white">
-                  <Sparkles className="w-4 h-4 text-red-500" />
-                  <span>2+ Years Experience</span>
+              <div className="flex items-center justify-between border-b border-[#cbd1dc]/50 pb-2">
+                <div className="flex items-center gap-1.5 px-2 py-0.5 rounded-lg neu-inset text-[10px] font-mono text-neutral-800 font-bold">
+                  <Brain className="w-3.5 h-3.5 text-red-500" />
+                  <span>GenAI & NLP</span>
                 </div>
-                <p className="text-[11px] font-mono text-neutral-400">
-                  Agentic Workflows • RAG • AWS & Azure
-                </p>
+                <div className="w-2 h-2 rounded-full led-red" />
               </div>
+
+              <div className="space-y-1 my-1">
+                <h4 className="text-xs font-mono font-bold tracking-wider text-neutral-900 uppercase">
+                  GENERATIVE AI & RAG
+                </h4>
+                <div className="flex flex-wrap gap-1">
+                  {["AWS Bedrock", "Azure OpenAI", "Hybrid RAG"].map((t) => (
+                    <span key={t} className="text-[9px] font-mono text-neutral-700 bg-white/70 px-1.5 py-0.5 rounded border border-[#cbd1dc]/70">
+                      {t}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              <p className="text-[10px] font-mono text-neutral-500">
+                Prompt Engineering & Structured Outputs
+              </p>
+            </motion.div>
+
+            {/* Expertise Card 2: Agentic AI & Workflows */}
+            <motion.div
+              ref={leftCard2Ref}
+              whileHover={{ y: -2 }}
+              className="p-4 rounded-2xl neu-raised cursor-pointer group flex flex-col justify-between min-h-[125px] relative"
+            >
+              <div className="flex items-center justify-between border-b border-[#cbd1dc]/50 pb-2">
+                <div className="flex items-center gap-1.5 px-2 py-0.5 rounded-lg neu-inset text-[10px] font-mono text-neutral-800 font-bold">
+                  <Bot className="w-3.5 h-3.5 text-red-500" />
+                  <span>LangGraph</span>
+                </div>
+                <div className="w-2 h-2 rounded-full led-red" />
+              </div>
+
+              <div className="space-y-1 my-1">
+                <h4 className="text-xs font-mono font-bold tracking-wider text-neutral-900 uppercase">
+                  AGENTIC WORKFLOWS
+                </h4>
+                <div className="flex flex-wrap gap-1">
+                  {["Multi-Agent", "LangChain", "Tool Calling", "MCP"].map((t) => (
+                    <span key={t} className="text-[9px] font-mono text-neutral-700 bg-white/70 px-1.5 py-0.5 rounded border border-[#cbd1dc]/70">
+                      {t}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              <p className="text-[10px] font-mono text-neutral-500">
+                Autonomous State Machines & Orchestration
+              </p>
+            </motion.div>
+
+            {/* Expertise Card 3: Evals & Guardrails */}
+            <motion.div
+              ref={leftCard3Ref}
+              whileHover={{ y: -2 }}
+              className="p-4 rounded-2xl neu-raised cursor-pointer group flex flex-col justify-between min-h-[125px] relative"
+            >
+              <div className="flex items-center justify-between border-b border-[#cbd1dc]/50 pb-2">
+                <div className="flex items-center gap-1.5 px-2 py-0.5 rounded-lg neu-inset text-[10px] font-mono text-neutral-800 font-bold">
+                  <ShieldCheck className="w-3.5 h-3.5 text-red-500" />
+                  <span>Governance</span>
+                </div>
+                <div className="w-2 h-2 rounded-full led-red" />
+              </div>
+
+              <div className="space-y-1 my-1">
+                <h4 className="text-xs font-mono font-bold tracking-wider text-neutral-900 uppercase">
+                  EVALS & GUARDRAILS
+                </h4>
+                <div className="flex flex-wrap gap-1">
+                  {["Pydantic v2", "HITL Gates", "LLM Evals"].map((t) => (
+                    <span key={t} className="text-[9px] font-mono text-neutral-700 bg-white/70 px-1.5 py-0.5 rounded border border-[#cbd1dc]/70">
+                      {t}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              <p className="text-[10px] font-mono text-neutral-500">
+                Strict Schema Validation & Hallucination Defense
+              </p>
+            </motion.div>
+          </div>
+
+          {/* =============================================================== */}
+          {/* 2. CENTER HERO PANEL: THE CORE COMPUTE UNIT (6 COLS)             */}
+          {/* =============================================================== */}
+          <div className="order-1 lg:order-2 lg:col-span-6 relative z-20 flex flex-col items-center">
+            
+            {/* The Main Raised Heavy Hardware Module */}
+            <div 
+              ref={centerPanelRef}
+              className="w-full max-w-[560px] p-6 sm:p-8 rounded-3xl neu-raised-thick relative space-y-6"
+            >
+              
+              {/* Header: 3 LEDs + Grid Stamped Icon */}
+              <div className="flex items-center justify-between border-b border-[#cbd1dc]/60 pb-4">
+                <div className="flex items-center gap-2">
+                  <span className="w-2.5 h-2.5 rounded-full led-red" />
+                  <span className="w-2.5 h-2.5 rounded-full led-red" />
+                  <span className="w-2.5 h-2.5 rounded-full led-red" />
+                  <span className="text-[10px] font-mono text-neutral-500 uppercase tracking-widest ml-2 font-bold">
+                    CORE PROCESSOR
+                  </span>
+                </div>
+
+                <div className="w-7 h-7 rounded-lg neu-inset flex items-center justify-center text-neutral-700">
+                  <Grid className="w-3.5 h-3.5" />
+                </div>
+              </div>
+
+              {/* Stamped Hardware Name Heading */}
+              <div className="space-y-2">
+                <div className="text-[11px] font-mono font-bold text-red-500 tracking-[0.25em] uppercase">
+                  <ScrambleText text="MOHD HANNAN" />
+                </div>
+
+                <h1 className="text-3xl sm:text-4xl md:text-5xl font-heading font-black tracking-tight text-neutral-950 uppercase leading-none">
+                  AI ENGINEER
+                </h1>
+
+                {/* Subtitle / Dynamic Typewriter */}
+                <div className="pt-2">
+                  <p className="text-xs sm:text-sm font-mono text-neutral-600 leading-relaxed">
+                    Software/AI Engineer with 2+ years of enterprise experience building Generative AI, LangGraph multi-agent workflows, and cloud native architectures.
+                  </p>
+                </div>
+              </div>
+
+              {/* Dynamic Mode Bar with Arrows */}
+              <div className="p-1.5 rounded-2xl neu-inset flex items-center justify-between gap-1">
+                <button
+                  onClick={() => setActiveTab(activeTab === "agent" ? "rag" : activeTab === "rag" ? "cloud" : "agent")}
+                  className="w-8 h-8 rounded-xl neu-raised flex items-center justify-center text-neutral-700 hover:text-red-500 transition-colors cursor-pointer"
+                >
+                  <ChevronLeft className="w-4 h-4" />
+                </button>
+
+                <div className="flex-1 text-center font-mono font-bold text-xs uppercase tracking-wider text-neutral-900">
+                  {activeTab === "agent" && "⚡ AGENTIC ORCHESTRATION"}
+                  {activeTab === "rag" && "🧠 ENTERPRISE RAG & HYBRID SEARCH"}
+                  {activeTab === "cloud" && "☁️ CLOUD NATIVE MICROSERVICES"}
+                </div>
+
+                <button
+                  onClick={() => setActiveTab(activeTab === "agent" ? "cloud" : activeTab === "cloud" ? "rag" : "agent")}
+                  className="w-8 h-8 rounded-xl neu-raised flex items-center justify-center text-neutral-700 hover:text-red-500 transition-colors cursor-pointer"
+                >
+                  <ChevronRight className="w-4 h-4" />
+                </button>
+              </div>
+
+              {/* Primary Profiles & Action Row: LinkedIn & GitHub */}
+              <div className="pt-2 space-y-3">
+                <div className="grid grid-cols-2 gap-3">
+                  <a
+                    href={personalInfo.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="neu-button-secondary py-3.5 px-4 text-xs font-mono font-bold tracking-wider rounded-2xl flex items-center justify-center gap-2 text-neutral-800 hover:text-red-500 transition-all cursor-pointer group"
+                  >
+                    <FaLinkedin className="w-4 h-4 text-[#0077b5] group-hover:scale-110 transition-transform" />
+                    <span>LINKEDIN</span>
+                  </a>
+
+                  <a
+                    href={personalInfo.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="neu-button-secondary py-3.5 px-4 text-xs font-mono font-bold tracking-wider rounded-2xl flex items-center justify-center gap-2 text-neutral-800 hover:text-red-500 transition-all cursor-pointer group"
+                  >
+                    <FaGithub className="w-4 h-4 text-neutral-800 group-hover:scale-110 transition-transform" />
+                    <span>GITHUB</span>
+                  </a>
+                </div>
+
+                {/* Secondary Action Row: Projects & Direct Email */}
+                <div className="flex items-center gap-3">
+                  <a
+                    href="#projects"
+                    className="flex-1 neu-button-secondary py-3 text-xs font-mono font-bold tracking-wider rounded-xl text-center"
+                  >
+                    EXPLORE PROJECTS →
+                  </a>
+                  <a
+                    href={`mailto:${personalInfo.email}`}
+                    className="neu-button-secondary p-3 rounded-xl text-neutral-700"
+                    title="Send Email"
+                  >
+                    <Send className="w-4 h-4 text-red-500" />
+                  </a>
+                </div>
+              </div>
+
+              {/* Stamped Ventilation Slot Details on Module Bottom */}
+              <div className="flex justify-center gap-2 pt-2">
+                <div className="w-12 h-1 rounded-full neu-inset-sm" />
+                <div className="w-12 h-1 rounded-full neu-inset-sm" />
+                <div className="w-12 h-1 rounded-full neu-inset-sm" />
+              </div>
+
+            </div>
+          </div>
+
+          {/* =============================================================== */}
+          {/* 3. RIGHT SIDE PANEL: FULL STACK & CLOUD ARCHITECTURE (3 COLS)   */}
+          {/* =============================================================== */}
+          <div className="order-3 lg:order-3 lg:col-span-3 flex flex-col gap-4 z-10">
+            <div className="text-[10px] font-mono text-neutral-500 uppercase tracking-widest px-1 font-bold flex items-center gap-1.5 justify-between">
+              <span>STACK & CLOUD RACK</span>
+              <span className="text-[9px] font-mono text-neutral-400">BUS: 64-BIT</span>
             </div>
 
-          </div>
-        </motion.div>
+            {/* Expertise Card 4: Full Stack Engineering */}
+            <motion.div
+              ref={rightCard1Ref}
+              whileHover={{ y: -2 }}
+              className="p-4 rounded-2xl neu-raised flex flex-col justify-between min-h-[125px]"
+            >
+              <div className="flex items-center justify-between border-b border-[#cbd1dc]/50 pb-2">
+                <div className="flex items-center gap-1.5 px-2 py-0.5 rounded-lg neu-inset text-[10px] font-mono text-neutral-800 font-bold">
+                  <Code2 className="w-3.5 h-3.5 text-red-500" />
+                  <span>Web & APIs</span>
+                </div>
+                <span className="w-2 h-2 rounded-full led-green" />
+              </div>
 
-      </motion.div>
+              <div className="space-y-1 my-1">
+                <h4 className="text-xs font-mono font-bold tracking-wider text-neutral-900 uppercase">
+                  FULL STACK STACK
+                </h4>
+                <div className="flex flex-wrap gap-1">
+                  {["Next.js 15", "React.js", "FastAPI", "Node.js"].map((t) => (
+                    <span key={t} className="text-[9px] font-mono text-neutral-700 bg-white/70 px-1.5 py-0.5 rounded border border-[#cbd1dc]/70">
+                      {t}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              <p className="text-[10px] font-mono text-neutral-500">
+                TypeScript, Python, Java & REST/GraphQL
+              </p>
+            </motion.div>
+
+            {/* Expertise Card 5: Cloud & DevOps */}
+            <motion.div
+              ref={rightCard2Ref}
+              whileHover={{ y: -2 }}
+              onClick={() => setToggleCloud(!toggleCloud)}
+              className="p-4 rounded-2xl neu-raised cursor-pointer flex flex-col justify-between min-h-[125px]"
+            >
+              <div className="flex items-center justify-between border-b border-[#cbd1dc]/50 pb-2">
+                <div className="flex items-center gap-1.5 px-2 py-0.5 rounded-lg neu-inset text-[10px] font-mono text-neutral-800 font-bold">
+                  <Cloud className="w-3.5 h-3.5 text-red-500" />
+                  <span>Cloud Native</span>
+                </div>
+                <span className={`w-2 h-2 rounded-full ${toggleCloud ? "led-green" : "led-red-dim"} transition-all`} />
+              </div>
+
+              <div className="space-y-1 my-1">
+                <h4 className="text-xs font-mono font-bold tracking-wider text-neutral-900 uppercase">
+                  CLOUD & DEVOPS
+                </h4>
+                <div className="flex flex-wrap gap-1">
+                  {["AWS", "Azure", "Docker", "CI/CD"].map((t) => (
+                    <span key={t} className="text-[9px] font-mono text-neutral-700 bg-white/70 px-1.5 py-0.5 rounded border border-[#cbd1dc]/70">
+                      {t}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              <p className="text-[10px] font-mono text-neutral-500">
+                Microservices & Automated Deployments
+              </p>
+            </motion.div>
+
+            {/* Expertise Card 6: Databases & Vector Stores */}
+            <motion.div
+              ref={rightCard3Ref}
+              whileHover={{ y: -2 }}
+              className="p-4 rounded-2xl neu-raised flex flex-col justify-between min-h-[125px]"
+            >
+              <div className="flex items-center justify-between border-b border-[#cbd1dc]/50 pb-2">
+                <div className="flex items-center gap-1.5 px-2 py-0.5 rounded-lg neu-inset text-[10px] font-mono text-neutral-800 font-bold">
+                  <Database className="w-3.5 h-3.5 text-neutral-800" />
+                  <span>Data Layer</span>
+                </div>
+                <div className="flex gap-1">
+                  <span className="w-1.5 h-1.5 rounded-full led-red" />
+                  <span className="w-1.5 h-1.5 rounded-full led-green" />
+                </div>
+              </div>
+
+              <div className="space-y-1 my-1">
+                <h4 className="text-xs font-mono font-bold tracking-wider text-neutral-900 uppercase">
+                  DATABASES & VECTOR STORES
+                </h4>
+                <div className="flex flex-wrap gap-1">
+                  {["PostgreSQL", "pgvector", "MongoDB", "MySQL"].map((t) => (
+                    <span key={t} className="text-[9px] font-mono text-neutral-700 bg-white/70 px-1.5 py-0.5 rounded border border-[#cbd1dc]/70">
+                      {t}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              <p className="text-[10px] font-mono text-neutral-500">
+                1536-D Vector Indices & Relational Schemas
+              </p>
+            </motion.div>
+          </div>
+
+        </div>
+
+      </div>
     </section>
   );
 }

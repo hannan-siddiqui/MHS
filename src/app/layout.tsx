@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { siteConfig } from "@/data/portfolio";
-import AIBackgroundParallax from "@/components/ui/AIBackgroundParallax";
+import PCBBackground from "@/components/ui/PCBBackground";
+import AIChatbot from "@/components/ui/AIChatbot";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -46,7 +47,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark">
+    <html lang="en">
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
@@ -59,9 +60,10 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body className="min-h-screen antialiased bg-[#0a0a0a] text-neutral-400 relative">
-        <AIBackgroundParallax />
+      <body className="min-h-screen antialiased bg-[#e4e7ec] text-neutral-800 relative">
+        <PCBBackground />
         {children}
+        <AIChatbot />
       </body>
     </html>
   );

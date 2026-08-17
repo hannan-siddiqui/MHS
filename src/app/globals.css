@@ -1,14 +1,14 @@
 @import "tailwindcss";
 
-/* ============================
-   DARK RED DESIGN SYSTEM
-   Modern. Bold. Creative.
-   ============================ */
+/* =========================================================================
+   INDUSTRIAL NEUMORPHISM / HIGH-TECH HARDWARE PCB DESIGN SYSTEM
+   Monochromatic Grey • Matte Stamped Modules • Glowing Red LED Accents
+   ========================================================================= */
 
 @layer base {
   * {
     scrollbar-width: thin;
-    scrollbar-color: rgba(239, 68, 68, 0.3) transparent;
+    scrollbar-color: rgba(160, 170, 190, 0.6) transparent;
   }
 
   *::-webkit-scrollbar {
@@ -20,130 +20,238 @@
   }
 
   *::-webkit-scrollbar-thumb {
-    background: rgba(239, 68, 68, 0.3);
+    background: rgba(160, 170, 190, 0.5);
     border-radius: 10px;
   }
 
   *::-webkit-scrollbar-thumb:hover {
-    background: rgba(239, 68, 68, 0.6);
+    background: rgba(120, 130, 150, 0.8);
   }
 
   html {
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    background-color: #e4e7ec;
+  }
+
+  section[id] {
+    scroll-margin-top: 5.5rem;
   }
 
   body {
     font-family: 'Inter', system-ui, sans-serif;
-    background-color: #08080a;
-    color: #d4d4d8;
+    background-color: #e4e7ec;
+    color: #374151;
     overflow-x: hidden;
   }
 
   h1, h2, h3, h4, h5, h6 {
     font-family: 'Outfit', 'Plus Jakarta Sans', system-ui, sans-serif;
-    color: #ffffff;
+    color: #111827;
   }
 
   ::selection {
-    background-color: rgba(239, 68, 68, 0.3);
-    color: #ffffff;
+    background-color: rgba(239, 68, 68, 0.2);
+    color: #111827;
   }
 
   a {
     text-decoration: none;
-    transition: all 0.3s ease;
+    transition: all 0.25s ease;
   }
 }
 
 @layer components {
-  /* Wireframe geometric container */
-  .wireframe-box {
-    position: relative;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    background: rgba(255, 255, 255, 0.02);
-    transition: all 0.3s ease;
+  /* Physical Raised Neumorphic Module */
+  .neu-raised {
+    background: #e4e7ec;
+    box-shadow: 
+      7px 7px 16px rgba(165, 175, 195, 0.65), 
+      -7px -7px 16px rgba(255, 255, 255, 0.95),
+      inset 1px 1px 1px rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    transition: all 0.25s ease;
   }
 
-  .wireframe-box:hover {
-    border-color: rgba(239, 68, 68, 0.5); /* red accent */
+  .neu-raised:hover {
+    box-shadow: 
+      9px 9px 20px rgba(160, 170, 190, 0.75), 
+      -9px -9px 20px rgba(255, 255, 255, 1),
+      inset 1px 1px 1px rgba(255, 255, 255, 0.9);
   }
 
-  /* Red accent button */
-  .btn-accent {
-    background-color: #ffffff;
-    color: #111111;
+  /* Deep Raised Hero Module / Hardware Cartridge */
+  .neu-raised-thick {
+    background: #e8ebf0;
+    box-shadow: 
+      12px 12px 28px rgba(155, 165, 185, 0.7), 
+      -12px -12px 28px rgba(255, 255, 255, 1),
+      inset 1px 1px 2px rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.7);
+  }
+
+  /* Debossed / Inset Tray Slot */
+  .neu-inset {
+    background: #dde0e6;
+    box-shadow: 
+      inset 4px 4px 8px rgba(155, 165, 185, 0.6), 
+      inset -4px -4px 8px rgba(255, 255, 255, 0.95);
+    border: 1px solid rgba(210, 215, 225, 0.5);
+  }
+
+  /* Micro Inset Slot (For chips and vents) */
+  .neu-inset-sm {
+    background: #d8dbe2;
+    box-shadow: 
+      inset 2px 2px 4px rgba(155, 165, 185, 0.55), 
+      inset -2px -2px 4px rgba(255, 255, 255, 0.9);
+  }
+
+  /* Tactile Stamped Charcoal Hardware Button */
+  .neu-button-primary {
+    background: #181a1e;
+    color: #f3f4f6;
     font-family: 'Outfit', sans-serif;
     font-weight: 700;
     text-transform: uppercase;
-    transition: all 0.3s ease;
+    box-shadow: 
+      4px 4px 10px rgba(0, 0, 0, 0.22),
+      -2px -2px 6px rgba(255, 255, 255, 0.6),
+      inset 1px 1px 1px rgba(255, 255, 255, 0.15);
+    border: 1px solid #282a30;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
   }
-  
-  .btn-accent:hover {
+
+  .neu-button-primary:hover {
+    background: #111215;
+    color: #ffffff;
+    box-shadow: 
+      2px 2px 5px rgba(0, 0, 0, 0.3),
+      -1px -1px 3px rgba(255, 255, 255, 0.4);
+    transform: translateY(1px);
+  }
+
+  .neu-button-primary:active {
+    box-shadow: 
+      inset 3px 3px 6px rgba(0, 0, 0, 0.5),
+      inset -1px -1px 2px rgba(255, 255, 255, 0.1);
+    transform: translateY(2px);
+  }
+
+  /* Tactile Raised Neutral Button */
+  .neu-button-secondary {
+    background: #e4e7ec;
+    color: #1f2937;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    box-shadow: 
+      4px 4px 10px rgba(160, 170, 190, 0.6),
+      -4px -4px 10px rgba(255, 255, 255, 0.95),
+      inset 1px 1px 1px rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+
+  .neu-button-secondary:hover {
+    color: #ef4444;
+    box-shadow: 
+      2px 2px 5px rgba(160, 170, 190, 0.7),
+      -2px -2px 5px rgba(255, 255, 255, 0.9);
+  }
+
+  .neu-button-secondary:active {
+    box-shadow: 
+      inset 3px 3px 6px rgba(160, 170, 190, 0.6),
+      inset -3px -3px 6px rgba(255, 255, 255, 0.9);
+    transform: translateY(1px);
+  }
+
+  /* Hardware Red LED Light */
+  .led-red {
     background-color: #ef4444;
-    color: #ffffff;
+    box-shadow: 
+      0 0 6px #ef4444, 
+      0 0 14px rgba(239, 68, 68, 0.75),
+      inset 0 0 2px rgba(255, 255, 255, 0.8);
   }
 
-  .btn-outline {
-    background-color: transparent;
-    color: #ffffff;
-    font-family: 'Outfit', sans-serif;
-    font-weight: 700;
-    text-transform: uppercase;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    transition: all 0.3s ease;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
+  /* Hardware Red LED Off / Dim */
+  .led-red-dim {
+    background-color: #991b1b;
+    box-shadow: inset 1px 1px 2px rgba(0, 0, 0, 0.4);
   }
 
-  .btn-outline:hover {
-    border-color: #ef4444;
-    color: #ef4444;
+  /* Hardware Green / Emerald LED */
+  .led-green {
+    background-color: #10b981;
+    box-shadow: 
+      0 0 6px #10b981, 
+      0 0 14px rgba(16, 185, 129, 0.75),
+      inset 0 0 2px rgba(255, 255, 255, 0.8);
+  }
+
+  /* PCB Copper / Solder Rivet Ring */
+  .pcb-via {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #d1d5db;
+    border: 2px solid #9ca3af;
+    box-shadow: inset 1px 1px 2px rgba(0, 0, 0, 0.25);
   }
 }
 
-@layer utilities {
-  .text-accent {
-    color: #ef4444;
+/* Traveling Signal Pulse on Wire Busses */
+@keyframes wireSignalFlow {
+  0% {
+    stroke-dashoffset: 60;
+  }
+  100% {
+    stroke-dashoffset: 0;
   }
 }
 
-@keyframes fadeSlideUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
+.animate-wire-flow {
+  stroke-dasharray: 6 12;
+  animation: wireSignalFlow 1.8s linear infinite;
+}
+
+.animate-wire-flow-fast {
+  stroke-dasharray: 4 8;
+  animation: wireSignalFlow 1.2s linear infinite;
+}
+
+@keyframes pcbPulseGlow {
+  0%, 100% {
+    opacity: 0.3;
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+  50% {
+    opacity: 0.9;
   }
+}
+
+.animate-pcb-glow {
+  animation: pcbPulseGlow 3s ease-in-out infinite;
 }
 
 @theme {
   --font-sans: 'Inter', system-ui, sans-serif;
   --font-heading: 'Outfit', 'Plus Jakarta Sans', sans-serif;
-  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
-  
-  --animate-marquee: marquee 10s linear infinite;
-  
-  @keyframes marquee {
-    from {
-      transform: translateX(0);
-    }
-    to {
-      transform: translateX(-50%);
-    }
-  }
+  --font-mono: 'JetBrains Mono', 'Space Mono', ui-monospace, SFMono-Regular, monospace;
 }
 
-/* Subtle section borders */
+/* Industrial PCB Section Separation */
 section {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid rgba(180, 190, 205, 0.4);
+  position: relative;
 }

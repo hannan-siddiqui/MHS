@@ -15,7 +15,7 @@ export const personalInfo = {
   lastName: "Hannan",
   email: "mohdhannan774@gmail.com",
   phone: "(+91) 7497932064",
-  linkedin: "https://www.linkedin.com/in/mohd-hannan-siddiqui-22560a406",
+  linkedin: "https://www.linkedin.com/in/hannandev/",
   linkedinHandle: "in/mohd-hannan-siddiqui-22560a406",
   github: "https://github.com/hannan-siddiqui",
   location: "India",
@@ -311,35 +311,28 @@ export const projects: Project[] = [
     ],
     architecture: {
       nodes: [
-        { id: "terminal", label: "Neural Terminal", x: 8, y: 20 },
-        { id: "acid_ui", label: "Acid Void UI", x: 8, y: 50 },
-        { id: "admin_ui", label: "Admin Nexus Studio", x: 8, y: 80 },
-        { id: "gateway", label: "FastAPI Gateway", x: 30, y: 35 },
-        { id: "guardrails", label: "Safety Guardrails", x: 30, y: 65 },
-        { id: "omni_agent", label: "Omni-Agent (Text-to-SQL)", x: 54, y: 15 },
-        { id: "product_agent", label: "Product Agent (Pydantic)", x: 54, y: 50 },
-        { id: "support_agent", label: "Support Agent (RAG)", x: 54, y: 85 },
-        { id: "governance", label: "Risk & HITL Gate", x: 74, y: 50 },
-        { id: "pg_relational", label: "PostgreSQL Relational", x: 92, y: 18 },
-        { id: "audit_logs", label: "Approval Queue", x: 92, y: 50 },
-        { id: "pg_vector", label: "pgvector Store", x: 92, y: 82 }
+        { id: "terminal", label: "Neural Terminal", x: 12, y: 20 },
+        { id: "acid_ui", label: "Acid Void UI", x: 12, y: 50 },
+        { id: "admin_ui", label: "Admin Nexus Studio", x: 12, y: 80 },
+        { id: "gateway", label: "FastAPI Gateway", x: 36, y: 20 },
+        { id: "guardrails", label: "Safety Guardrails", x: 36, y: 65 },
+        { id: "omni_agent", label: "Omni-Agent (Text-to-SQL)", x: 60, y: 20 },
+        { id: "product_agent", label: "Product Agent (Pydantic)", x: 60, y: 50 },
+        { id: "support_agent", label: "Support Agent (RAG)", x: 60, y: 80 },
+        { id: "governance", label: "Risk & HITL Gate", x: 82, y: 50 },
+        { id: "pg_relational", label: "PostgreSQL Relational", x: 82, y: 20 },
+        { id: "pg_vector", label: "pgvector Store", x: 82, y: 80 }
       ],
       edges: [
         { source: "terminal", target: "gateway", label: "Query", animated: true },
-        { source: "admin_ui", target: "gateway", label: "Draft Prompt", animated: true },
-        { source: "gateway", target: "guardrails", label: "Inspect", animated: true },
-        { source: "guardrails", target: "omni_agent", label: "Text-to-SQL", animated: true },
-        { source: "guardrails", target: "product_agent", label: "Product Gen", animated: true },
-        { source: "guardrails", target: "support_agent", label: "Policy Q&A", animated: true },
+        { source: "gateway", target: "omni_agent", label: "Text-to-SQL", animated: true },
         { source: "omni_agent", target: "pg_relational", label: "Read SQL", animated: true },
-        { source: "omni_agent", target: "pg_vector", label: "Vector Search", animated: true },
-        { source: "support_agent", target: "pg_vector", label: "Cosine Sim", animated: true },
-        { source: "product_agent", target: "governance", label: "Validate", animated: true },
-        { source: "governance", target: "pg_relational", label: "Low Risk", animated: true },
-        { source: "governance", target: "audit_logs", label: "High Risk", animated: true },
-        { source: "audit_logs", target: "pg_relational", label: "Approved", animated: true },
-        { source: "pg_relational", target: "gateway", label: "Payload", animated: true },
-        { source: "gateway", target: "acid_ui", label: "Render", animated: true }
+        { source: "acid_ui", target: "guardrails", label: "Draft Prompt", animated: true },
+        { source: "guardrails", target: "product_agent", label: "Validate", animated: true },
+        { source: "product_agent", target: "governance", label: "HITL Check", animated: true },
+        { source: "governance", target: "pg_relational", label: "Approved", animated: true },
+        { source: "admin_ui", target: "support_agent", label: "Policy Q&A", animated: true },
+        { source: "support_agent", target: "pg_vector", label: "Cosine Sim", animated: true }
       ]
     }
   },
@@ -413,20 +406,20 @@ export const projects: Project[] = [
     ],
     architecture: {
       nodes: [
-        { id: "client", label: "Next.js UI", x: 6, y: 40 },
+        { id: "client", label: "Next.js UI", x: 8, y: 40 },
         { id: "guardrails", label: "Semantic Guardrails", x: 22, y: 40 },
-        { id: "reject", label: "Blocked (Unsafe)", x: 22, y: 10 },
+        { id: "reject", label: "Blocked (Unsafe)", x: 22, y: 15 },
         { id: "router", label: "Intent Router", x: 38, y: 40 },
-        { id: "sql", label: "Text-to-SQL", x: 54, y: 20 },
-        { id: "rag", label: "RAG Pipeline", x: 54, y: 60 },
-        { id: "pg", label: "PostgreSQL", x: 70, y: 20 },
-        { id: "vector", label: "Vector DB", x: 70, y: 60 },
-        { id: "cards", label: "Property Cards", x: 86, y: 20 },
-        { id: "text", label: "Text Response", x: 86, y: 60 },
-        { id: "pdf", label: "PDF Upload", x: 22, y: 85 },
-        { id: "parse", label: "Parsing", x: 38, y: 85 },
-        { id: "chunk", label: "Chunking", x: 54, y: 85 },
-        { id: "embed", label: "Embedding", x: 70, y: 85 }
+        { id: "sql", label: "Text-to-SQL", x: 54, y: 22 },
+        { id: "rag", label: "RAG Pipeline", x: 54, y: 58 },
+        { id: "pg", label: "PostgreSQL", x: 68, y: 22 },
+        { id: "vector", label: "Vector DB", x: 68, y: 58 },
+        { id: "cards", label: "Property Cards", x: 82, y: 22 },
+        { id: "text", label: "Text Response", x: 82, y: 58 },
+        { id: "pdf", label: "PDF Upload", x: 22, y: 82 },
+        { id: "parse", label: "Parsing", x: 38, y: 82 },
+        { id: "chunk", label: "Chunking", x: 54, y: 82 },
+        { id: "embed", label: "Embedding", x: 68, y: 82 }
       ],
       edges: [
         { source: "client", target: "guardrails", label: "Query", animated: true },
@@ -515,23 +508,23 @@ export const projects: Project[] = [
     ],
     architecture: {
       nodes: [
-        // Document ingestion pipeline (top lane, y=15)
-        { id: "upload", label: "Document Upload", x: 6, y: 15 },
-        { id: "parse", label: "Parsing", x: 22, y: 15 },
-        { id: "chunk", label: "Chunking", x: 38, y: 15 },
-        { id: "embed_doc", label: "Embedding", x: 54, y: 15 },
-        { id: "vector", label: "Vector DB", x: 70, y: 15 },
+        // Document ingestion pipeline (top lane, y=25)
+        { id: "upload", label: "Document Upload", x: 8, y: 25 },
+        { id: "parse", label: "Parsing", x: 24, y: 25 },
+        { id: "chunk", label: "Chunking", x: 40, y: 25 },
+        { id: "embed_doc", label: "Embedding", x: 56, y: 25 },
+        { id: "vector", label: "Vector DB", x: 75, y: 25 },
 
         // User query pipeline (bottom lane, y=75)
-        { id: "query", label: "User Query", x: 6, y: 75 },
+        { id: "query", label: "User Query", x: 8, y: 75 },
         { id: "embed_q", label: "Query Embedding", x: 22, y: 75 },
-        { id: "cosine", label: "Cosine Similarity", x: 38, y: 75 },
-        { id: "topk", label: "Top-K Results", x: 54, y: 75 },
-        { id: "llm", label: "LLM (OpenAI)", x: 70, y: 75 },
-        { id: "result", label: "Response", x: 88, y: 75 },
+        { id: "cosine", label: "Cosine Similarity", x: 37, y: 75 },
+        { id: "topk", label: "Top-K Results", x: 52, y: 75 },
+        { id: "llm", label: "LLM (OpenAI)", x: 68, y: 75 },
+        { id: "result", label: "Response", x: 82, y: 75 },
 
-        // Shared connection label
-        { id: "nextjs", label: "Next.js UI", x: 6, y: 45 }
+        // UI Entry (middle, y=50)
+        { id: "nextjs", label: "Next.js UI", x: 8, y: 50 }
       ],
       edges: [
         // Ingestion flow

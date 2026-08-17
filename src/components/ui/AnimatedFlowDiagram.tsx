@@ -33,31 +33,39 @@ export default function AnimatedFlowDiagram({ nodes, edges }: AnimatedFlowDiagra
   if (!mounted) return null;
 
   return (
-    <div className="relative w-full bg-[#0a0a0a] rounded-xl border border-white/10 overflow-hidden shadow-2xl">
-      {/* Mobile scroll hint header */}
-      <div className="sm:hidden flex items-center justify-between px-4 py-2.5 bg-white/5 border-b border-white/10 text-[11px] font-mono text-neutral-400">
-        <span className="flex items-center gap-2">
-          <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
-          Architecture Flow
-        </span>
-        <span className="text-red-400/90 font-medium">Swipe diagram to scroll ↔</span>
+    <div className="relative w-full rounded-3xl neu-raised border border-white/80 overflow-hidden bg-[#e4e7ec] select-none">
+      
+      {/* Hardware Panel Telemetry Header */}
+      <div className="flex items-center justify-between px-6 py-3.5 border-b border-[#cbd1dc]/70 bg-[#dde0e6]/80">
+        <div className="flex items-center gap-2.5">
+          <span className="w-2.5 h-2.5 rounded-full led-red" />
+          <span className="text-xs font-mono font-bold text-neutral-900 uppercase tracking-wider">
+            SYSTEM ARCHITECTURE & DATA FLOW BUS
+          </span>
+        </div>
+        <div className="flex items-center gap-2 text-[10px] font-mono text-neutral-600">
+          <span className="w-2 h-2 rounded-full led-green" />
+          <span className="hidden sm:inline font-semibold">SIGNAL BUS : 200 OK</span>
+          <span className="sm:hidden">SWIPE TO SCROLL ↔</span>
+        </div>
       </div>
 
-      {/* Scrollable Container on Mobile */}
+      {/* Scrollable Container on Mobile / High-Res View on Desktop */}
       <div className="w-full overflow-x-auto touch-pan-x">
         <div 
           ref={containerRef} 
-          className="relative min-w-[750px] sm:min-w-0 w-full aspect-[16/10] sm:aspect-video bg-[#0a0a0a] font-mono text-xs overflow-hidden select-none"
+          className="relative min-w-[850px] sm:min-w-0 w-full aspect-[16/9.5] bg-[#e4e7ec] font-mono text-xs overflow-hidden"
         >
-          {/* Grid Background */}
+          {/* Subtle PCB Dot Grid Pattern */}
           <div 
-            className="absolute inset-0 opacity-[0.03]" 
+            className="absolute inset-0 opacity-30 pointer-events-none" 
             style={{
-              backgroundImage: 'radial-gradient(circle, #fff 1px, transparent 1px)',
-              backgroundSize: '20px 20px'
+              backgroundImage: 'radial-gradient(circle, #8c96a5 1px, transparent 1px)',
+              backgroundSize: '24px 24px'
             }} 
           />
 
+          {/* SVG PCB Traces & Flowing Packets (Layer 1: Behind Nodes) */}
           <svg 
             className="absolute inset-0 w-full h-full pointer-events-none z-[5]" 
             viewBox="0 0 1000 600"
@@ -65,7 +73,7 @@ export default function AnimatedFlowDiagram({ nodes, edges }: AnimatedFlowDiagra
           >
             <defs>
               <marker
-                id="arrowhead"
+                id="pcb-arrow"
                 markerWidth="8"
                 markerHeight="6"
                 refX="7"
@@ -73,7 +81,7 @@ export default function AnimatedFlowDiagram({ nodes, edges }: AnimatedFlowDiagra
                 orient="auto"
                 markerUnits="userSpaceOnUse"
               >
-                <polygon points="0 0, 8 3, 0 6" fill="#555" />
+                <polygon points="0 0, 8 3, 0 6" fill="#6b7280" />
               </marker>
             </defs>
 
@@ -83,7 +91,6 @@ export default function AnimatedFlowDiagram({ nodes, edges }: AnimatedFlowDiagra
 
               if (!sourceNode || !targetNode) return null;
 
-              // Use fixed 1000x600 viewBox for consistent coordinates matching node x,y percentages
               const sx = sourceNode.x * 10;
               const sy = sourceNode.y * 6;
               const tx = targetNode.x * 10;
@@ -93,7 +100,8 @@ export default function AnimatedFlowDiagram({ nodes, edges }: AnimatedFlowDiagra
               const dy = ty - sy;
               let pathD: string;
 
-              if (Math.abs(dx) > Math.abs(dy)) {
+              // Smooth 45-degree / Bezier PCB curve
+              if (Math.abs(dx) >= Math.abs(dy)) {
                 const cx = sx + dx * 0.5;
                 pathD = `M ${sx} ${sy} C ${cx} ${sy}, ${cx} ${ty}, ${tx} ${ty}`;
               } else {
@@ -101,48 +109,38 @@ export default function AnimatedFlowDiagram({ nodes, edges }: AnimatedFlowDiagra
                 pathD = `M ${sx} ${sy} C ${sx} ${cy}, ${tx} ${cy}, ${tx} ${ty}`;
               }
 
-              const mx = (sx + tx) / 2;
-              const my = (sy + ty) / 2;
-
               return (
                 <g key={`edge-${idx}`}>
+                  {/* 1. Underlying Debossed Wire Track */}
                   <path
                     d={pathD}
                     fill="none"
-                    stroke="#333"
+                    stroke="#cbd1dc"
+                    strokeWidth="4"
+                    strokeLinecap="round"
+                  />
+
+                  {/* 2. Copper PCB Trace Core */}
+                  <path
+                    d={pathD}
+                    fill="none"
+                    stroke="#8c96a5"
                     strokeWidth="1.5"
                     strokeDasharray="6 4"
-                    markerEnd="url(#arrowhead)"
+                    markerEnd="url(#pcb-arrow)"
                   />
-                  {edge.label && (
-                    <>
-                      <rect
-                        x={mx - edge.label.length * 3.5 - 4}
-                        y={my - 14}
-                        width={edge.label.length * 7 + 8}
-                        height={14}
-                        rx="3"
-                        fill="#0a0a0a"
-                      />
-                      <text
-                        x={mx}
-                        y={my - 4}
-                        fill="#888"
-                        fontSize="9"
-                        textAnchor="middle"
-                      >
-                        {edge.label}
-                      </text>
-                    </>
-                  )}
+
+                  {/* 3. Animated Traveling Red Signal Packet */}
                   {edge.animated && (
                     <motion.circle
-                      r="3"
-                      fill="#fff"
-                      style={{ filter: "drop-shadow(0 0 4px #fff)" }}
+                      r="3.5"
+                      fill="#ef4444"
+                      stroke="#ffffff"
+                      strokeWidth="1"
+                      style={{ filter: "drop-shadow(0 0 5px #ef4444)" }}
                     >
                       <animateMotion
-                        dur="3s"
+                        dur="2.5s"
                         repeatCount="indefinite"
                         path={pathD}
                       />
@@ -153,28 +151,58 @@ export default function AnimatedFlowDiagram({ nodes, edges }: AnimatedFlowDiagra
             })}
           </svg>
 
-          {/* Nodes */}
+          {/* Stamped Hardware Microchip Nodes (Layer 2: z-10) */}
           {nodes.map((node) => (
             <motion.div
               key={node.id}
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="absolute flex items-center justify-center px-3 py-1.5 bg-[#111] border border-white/20 rounded-md shadow-lg z-10 whitespace-nowrap"
+              transition={{ duration: 0.4 }}
+              className="absolute flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl neu-raised border border-white z-10 whitespace-nowrap cursor-default hover:border-red-500/80 transition-all shadow-sm"
               style={{
                 left: `${node.x}%`,
                 top: `${node.y}%`,
                 transform: "translate(-50%, -50%)",
               }}
             >
-              <span className="font-mono font-medium text-[10px] text-white/90">
+              <span className="w-1.5 h-1.5 rounded-full led-red shrink-0" />
+              <span className="font-mono font-bold text-[11px] text-neutral-900 tracking-wide">
                 {node.label}
               </span>
             </motion.div>
           ))}
+
+          {/* Elevated Edge Labels (Layer 3: z-20 — ALWAYS on top of wires & nodes, perfectly clear) */}
+          {edges.map((edge, idx) => {
+            if (!edge.label) return null;
+            const sourceNode = nodes.find((n) => n.id === edge.source);
+            const targetNode = nodes.find((n) => n.id === edge.target);
+            if (!sourceNode || !targetNode) return null;
+
+            const midX = (sourceNode.x + targetNode.x) / 2;
+            const isHorizontal = Math.abs(targetNode.y - sourceNode.y) < 10;
+            // Float label above horizontal wires so it never touches or hides under nodes
+            const midY = (sourceNode.y + targetNode.y) / 2 + (isHorizontal ? -3.8 : 0);
+
+            return (
+              <div
+                key={`label-${idx}`}
+                className="absolute px-2 py-0.5 rounded-md bg-[#e8ebf0] border border-[#b8c2d1] shadow-sm z-20 pointer-events-none whitespace-nowrap flex items-center justify-center"
+                style={{
+                  left: `${midX}%`,
+                  top: `${midY}%`,
+                  transform: "translate(-50%, -50%)",
+                }}
+              >
+                <span className="font-mono font-bold text-[9.5px] text-neutral-800 tracking-tight">
+                  {edge.label}
+                </span>
+              </div>
+            );
+          })}
+
         </div>
       </div>
     </div>
   );
 }
-

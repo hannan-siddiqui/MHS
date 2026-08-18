@@ -26,6 +26,7 @@ import {
 import CircuitWireBus from "@/components/ui/CircuitWireBus";
 import Typewriter from "@/components/ui/Typewriter";
 import ScrambleText from "@/components/ui/ScrambleText";
+import GlitchText from "@/components/ui/GlitchText";
 import { FaLinkedin, FaGithub } from "react-icons/fa6";
 
 export default function HeroSection() {
@@ -210,17 +211,41 @@ export default function HeroSection() {
               </div>
 
               {/* Stamped Hardware Name Heading */}
-              <div className="space-y-2">
-                <div className="text-[11px] font-mono font-bold text-red-500 tracking-[0.25em] uppercase">
-                  <ScrambleText text="MOHD HANNAN" />
+              <div className="space-y-3">
+                <div className="flex items-center justify-between">
+                  <div className="text-[11px] font-mono font-bold text-red-500 tracking-[0.25em] uppercase flex items-center gap-2">
+                    <ScrambleText text="MOHD HANNAN" />
+                  </div>
+                  <div className="flex items-center gap-1.5 px-2 py-0.5 rounded-md neu-inset text-[9px] font-mono text-neutral-600">
+                    <span className="w-1.5 h-1.5 rounded-full led-red animate-pulse" />
+                    <span className="font-semibold text-neutral-700">CORE_V2.5</span>
+                  </div>
                 </div>
 
-                <h1 className="text-3xl sm:text-4xl md:text-5xl font-heading font-black tracking-tight text-neutral-950 uppercase leading-none">
-                  AI ENGINEER
-                </h1>
+                <div className="space-y-2">
+                  <h1 className="text-3xl sm:text-4xl md:text-5xl font-heading font-black tracking-tight text-neutral-950 uppercase leading-none cursor-pointer group flex items-center gap-2">
+                    <GlitchText
+                      text="AI ENGINEER"
+                      glitchOnHover={true}
+                      className="group-hover:text-red-600 transition-colors"
+                    />
+                    <span className="w-2.5 h-2.5 rounded-full led-red ml-1 shrink-0" />
+                  </h1>
 
-                {/* Subtitle / Dynamic Typewriter */}
-                <div className="pt-2">
+                  {/* High-Tech PCB Laser Bus Underline */}
+                  <div className="flex items-center gap-2 pt-0.5">
+                    <div className="w-2 h-2 rounded-full pcb-via shrink-0" />
+                    <div className="h-[2px] flex-1 bg-gradient-to-r from-red-500/80 via-neutral-300 to-transparent relative overflow-hidden rounded-full">
+                      <div className="absolute inset-0 w-12 bg-red-400 blur-[1px] animate-wire-flow" />
+                    </div>
+                    <span className="text-[8px] font-mono text-neutral-400 uppercase tracking-widest shrink-0">
+                      SYS_ACTIVE
+                    </span>
+                  </div>
+                </div>
+
+                {/* Subtitle */}
+                <div className="pt-1">
                   <p className="text-xs sm:text-sm font-mono text-neutral-600 leading-relaxed">
                     Software/AI Engineer with 2+ years of enterprise experience building Generative AI, LangGraph multi-agent workflows, and cloud native architectures.
                   </p>

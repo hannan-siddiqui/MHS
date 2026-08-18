@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 
 interface GlitchTextProps {
   text: string;
@@ -17,14 +17,16 @@ export default function GlitchText({
   const [isGlitching, setIsGlitching] = useState(false);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
-  const chars = "!<>-_\\/[]{}—=+*^?#_アイウエオカキクケコ";
+  const chars = "!<>-_/[]{}—=+*^?#010101XYZ_";
 
-  const startGlitch = () => {
+  const startGlitch = useCallback(() => {
     if (isGlitching) return;
     setIsGlitching(true);
 
     let iteration = 0;
     const maxIterations = text.length;
+
+    if (intervalRef.current) clearInterval(intervalRef.current);
 
     intervalRef.current = setInterval(() => {
       setDisplayText(
@@ -45,22 +47,21 @@ export default function GlitchText({
         setDisplayText(text);
         setIsGlitching(false);
       }
-    }, 30);
-  };
+    }, 28);
+  }, [text, isGlitching, chars]);
 
   useEffect(() => {
-    // Initial glitch on mount
-    const timeout = setTimeout(startGlitch, 500);
+    setDisplayText(text);
+    const timeout = setTimeout(startGlitch, 400);
     return () => {
       clearTimeout(timeout);
       if (intervalRef.current) clearInterval(intervalRef.current);
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [text, startGlitch]);
 
   return (
     <span
-      className={`glitch-text ${className}`}
+      className={`inline-block select-none transition-colors ${className}`}
       onMouseEnter={glitchOnHover ? startGlitch : undefined}
       data-text={text}
     >

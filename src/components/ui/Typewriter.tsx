@@ -17,7 +17,7 @@ export default function Typewriter({
   words,
   className = "",
   cursorClassName = "text-red-500",
-  typingSpeed = 70,
+  typingSpeed = 75,
   deletingSpeed = 40,
   pauseDuration = 2200,
   cursor = "|",
@@ -27,9 +27,14 @@ export default function Typewriter({
   const [wordIndex, setWordIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    if (!words || words.length === 0) return;
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (!words || words.length === 0 || !mounted) return;
 
     const currentWord = words[wordIndex % words.length];
 
@@ -65,15 +70,17 @@ export default function Typewriter({
     }, currentSpeed);
 
     return () => clearTimeout(timeout);
-  }, [text, isDeleting, wordIndex, words, typingSpeed, deletingSpeed, pauseDuration, isPaused]);
+  }, [text, isDeleting, wordIndex, words, typingSpeed, deletingSpeed, pauseDuration, isPaused, mounted]);
+
+  const displayText = mounted ? text : words[0] || "";
 
   return (
-    <span className={`inline-flex items-center ${className}`}>
-      {prefix && <span className="mr-1.5 opacity-80">{prefix}</span>}
-      <span className="relative">
-        {text}
+    <span className={`inline-flex items-center whitespace-nowrap ${className}`}>
+      {prefix && <span className="mr-1.5 opacity-80 shrink-0">{prefix}</span>}
+      <span className="relative inline-flex items-center whitespace-nowrap">
+        <span className="whitespace-nowrap">{displayText}</span>
         <span 
-          className={`inline-block ml-0.5 font-mono animate-blink-cursor font-light ${cursorClassName}`}
+          className={`inline-block ml-1 font-mono animate-blink-cursor select-none shrink-0 ${cursorClassName}`}
           style={{
             textShadow: "0 0 10px rgba(239, 68, 68, 0.8)",
           }}

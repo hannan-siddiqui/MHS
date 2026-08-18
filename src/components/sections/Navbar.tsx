@@ -5,6 +5,7 @@ import { navigation, personalInfo } from "@/data/portfolio";
 import { motion, AnimatePresence } from "framer-motion";
 import { useRouter, usePathname } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import { Cpu, Terminal, ShieldCheck } from "lucide-react";
 
 export default function Navbar() {
@@ -53,14 +54,21 @@ export default function Navbar() {
     <nav className="fixed top-0 left-0 right-0 z-50 bg-[#e4e7ec]/90 backdrop-blur-md border-b border-[#cbd1dc] transition-all duration-300">
       <div className="max-w-[1440px] mx-auto px-6 py-4 flex items-center justify-between">
         
-        {/* Hardware Stamped Brand Logo */}
+        {/* Hardware Stamped Brand Logo with Biometric Avatar */}
         <Link
           href="/"
           onClick={(e) => handleNavClick(e, "#home")}
           className="flex items-center gap-3 group cursor-pointer"
         >
-          <div className="w-8 h-8 rounded-xl neu-raised flex items-center justify-center text-neutral-800 group-hover:text-red-500 transition-colors">
-            <Cpu className="w-4 h-4" />
+          <div className="w-9 h-9 rounded-xl neu-raised relative overflow-hidden flex items-center justify-center p-0.5 border border-white/80 group-hover:border-red-500/70 transition-colors shrink-0">
+            <Image
+              src="/profile.jpg"
+              alt={`${personalInfo.firstName} ${personalInfo.lastName}`}
+              width={36}
+              height={36}
+              className="w-full h-full object-cover rounded-[10px] filter contrast-105 group-hover:scale-110 transition-transform duration-300"
+            />
+            <div className="absolute top-0.5 right-0.5 w-1.5 h-1.5 rounded-full led-red pointer-events-none" />
           </div>
           <div>
             <div className="text-base font-heading font-extrabold tracking-wider text-neutral-900 flex items-center gap-1">

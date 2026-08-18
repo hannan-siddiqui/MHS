@@ -255,3 +255,42 @@ section {
   border-bottom: 1px solid rgba(180, 190, 205, 0.4);
   position: relative;
 }
+
+/* Custom Cursor Hardware Reticle Styling */
+@media (pointer: fine) {
+  body.custom-cursor-enabled,
+  body.custom-cursor-enabled * {
+    cursor: none !important;
+  }
+}
+
+@keyframes pingOnce {
+  0% {
+    transform: translate(-50%, -50%) scale(0.2);
+    opacity: 0.9;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(2.4);
+    opacity: 0;
+  }
+}
+
+.animate-ping-once {
+  animation: pingOnce 0.5s cubic-bezier(0.1, 0.9, 0.2, 1) forwards;
+}
+
+@keyframes blinkCursor {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+.animate-blink-cursor {
+  animation: blinkCursor 0.9s ease-in-out infinite;
+}
+
+
+

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { siteConfig } from "@/data/portfolio";
 import PCBBackground from "@/components/ui/PCBBackground";
+import HardwareCursor from "@/components/ui/HardwareCursor";
 import AIChatbot from "@/components/ui/AIChatbot";
 import "./globals.css";
 
@@ -62,6 +63,7 @@ export default function RootLayout({
       </head>
       <body className="min-h-screen antialiased bg-[#e4e7ec] text-neutral-800 relative">
         <PCBBackground />
+        <HardwareCursor />
         {children}
         <AIChatbot />
       </body>

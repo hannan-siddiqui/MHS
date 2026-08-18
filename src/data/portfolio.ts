@@ -246,7 +246,7 @@ export const projects: Project[] = [
     title: "HyperCart AI — Autonomous Multi-Agent E-Commerce Operating System",
     description: "Full-stack, enterprise-grade AI commerce platform featuring dynamic Text-to-SQL intent routing, structured product schema generation with Pydantic v2, pgvector RAG customer support, and human-governed safety guardrails.",
     technologies: ["Next.js 14", "Python", "FastAPI", "LangChain", "PostgreSQL", "pgvector", "Pydantic v2", "Docker"],
-    githubUrl: "https://github.com/hannan-siddiqui/HyperCart-AI",
+    githubUrl: "https://github.com/hannan-siddiqui/AI_Commerce",
     // liveUrl: "#",
     detailedDescription: [
       "HyperCart AI bridges the gap between modern e-commerce storefronts and autonomous LLM workflows. Instead of traditional static search bars and tedious manual admin catalog entries, HyperCart AI provides a dual-sided intelligence system.",

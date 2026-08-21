@@ -3,8 +3,10 @@
 import React from "react";
 import { personalInfo } from "@/data/portfolio";
 import Link from "next/link";
-import { Cpu, ChevronUp, Radio, Terminal, Mail } from "lucide-react";
+import { motion } from "framer-motion";
+import { Cpu, ChevronUp, Mail } from "lucide-react";
 import { FaLinkedin, FaGithub } from "react-icons/fa6";
+import { fadeInUp, staggerContainer } from "@/lib/animations";
 
 export default function Footer() {
   const scrollToTop = () => {
@@ -14,7 +16,6 @@ export default function Footer() {
   return (
     <footer className="relative bg-[#dde0e6] border-t-2 border-[#cbd1dc] pt-16 pb-12 overflow-hidden select-none">
       
-      {/* Background PCB Grid Accent */}
       <div 
         className="absolute inset-0 opacity-25 pointer-events-none" 
         style={{
@@ -23,10 +24,15 @@ export default function Footer() {
         }} 
       />
 
-      <div className="max-w-[1440px] mx-auto px-6 relative z-10 space-y-12">
+      <motion.div
+        variants={staggerContainer}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-80px" }}
+        className="max-w-[1440px] mx-auto px-4 sm:px-6 relative z-10 space-y-12"
+      >
         
-        {/* Main Stamped Hardware Chassis Box */}
-        <div className="p-8 sm:p-10 rounded-3xl neu-raised border border-white/80 space-y-8 bg-[#e4e7ec]">
+        <motion.div variants={fadeInUp} className="p-5 sm:p-8 md:p-10 rounded-3xl neu-raised border border-white/80 space-y-8 bg-[#e4e7ec] min-w-0">
           
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
             
@@ -135,10 +141,10 @@ export default function Footer() {
 
               <button 
                 onClick={scrollToTop}
-                className="neu-button-secondary px-4 py-2.5 rounded-xl text-xs font-mono font-bold tracking-wider flex items-center gap-2 cursor-pointer mt-2"
+                className="neu-button-secondary px-4 py-2.5 rounded-xl text-xs font-mono font-bold tracking-wider flex items-center gap-2 cursor-pointer mt-2 group"
               >
                 <span>RESET TO PIN 0</span>
-                <ChevronUp className="w-4 h-4 text-red-500" />
+                <ChevronUp className="w-4 h-4 text-red-500 group-hover:-translate-y-1 transition-transform" />
               </button>
             </div>
 
@@ -157,9 +163,9 @@ export default function Footer() {
             </div>
           </div>
 
-        </div>
+        </motion.div>
 
-      </div>
+      </motion.div>
     </footer>
   );
 }

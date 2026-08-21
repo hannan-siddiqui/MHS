@@ -29,10 +29,12 @@
   }
 
   html {
-    scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     background-color: #e4e7ec;
+    overflow-x: hidden;
+    max-width: 100vw;
+    width: 100%;
   }
 
   section[id] {
@@ -44,6 +46,9 @@
     background-color: #e4e7ec;
     color: #374151;
     overflow-x: hidden;
+    max-width: 100vw;
+    width: 100%;
+    position: relative;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -79,6 +84,7 @@
       9px 9px 20px rgba(160, 170, 190, 0.75), 
       -9px -9px 20px rgba(255, 255, 255, 1),
       inset 1px 1px 1px rgba(255, 255, 255, 0.9);
+    transform: translateY(-2px);
   }
 
   /* Deep Raised Hero Module / Hardware Cartridge */
@@ -256,11 +262,17 @@ section {
   position: relative;
 }
 
-/* Custom Cursor Hardware Reticle Styling */
+/* Custom Hardware Cursor Styling (Desktop Only) */
 @media (pointer: fine) {
   body.custom-cursor-enabled,
   body.custom-cursor-enabled * {
     cursor: none !important;
+  }
+
+  body.custom-cursor-enabled input,
+  body.custom-cursor-enabled textarea,
+  body.custom-cursor-enabled [contenteditable="true"] {
+    cursor: text !important;
   }
 }
 
@@ -292,5 +304,200 @@ section {
   animation: blinkCursor 0.9s ease-in-out infinite;
 }
 
+/* LED pulse — hardware status indicator */
+@keyframes ledPulse {
+  0%, 100% {
+    opacity: 1;
+    box-shadow: 0 0 6px #ef4444, 0 0 14px rgba(239, 68, 68, 0.75), inset 0 0 2px rgba(255, 255, 255, 0.8);
+  }
+  50% {
+    opacity: 0.65;
+    box-shadow: 0 0 3px #ef4444, 0 0 8px rgba(239, 68, 68, 0.4), inset 0 0 2px rgba(255, 255, 255, 0.6);
+  }
+}
 
+.animate-led-pulse {
+  animation: ledPulse 2s ease-in-out infinite;
+}
+
+@keyframes ledPulseGreen {
+  0%, 100% {
+    opacity: 1;
+    box-shadow: 0 0 6px #10b981, 0 0 14px rgba(16, 185, 129, 0.75);
+  }
+  50% {
+    opacity: 0.7;
+    box-shadow: 0 0 3px #10b981, 0 0 8px rgba(16, 185, 129, 0.4);
+  }
+}
+
+.animate-led-green-pulse {
+  animation: ledPulseGreen 2.5s ease-in-out infinite;
+}
+
+/* Subtle float for hero center module */
+@keyframes hardwareFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+.animate-hardware-float {
+  animation: hardwareFloat 5s ease-in-out infinite;
+}
+
+/* Signal sweep across dividers */
+@keyframes signalSweep {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(400%);
+  }
+}
+
+.animate-signal-sweep {
+  animation: signalSweep 2.5s ease-in-out infinite;
+}
+
+/* Card shine on hover */
+@keyframes cardShine {
+  0% {
+    transform: translateX(-100%) skewX(-15deg);
+  }
+  100% {
+    transform: translateX(200%) skewX(-15deg);
+  }
+}
+
+.card-shine {
+  position: relative;
+  overflow: hidden;
+}
+
+.card-shine::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 40%,
+    rgba(255, 255, 255, 0.35) 50%,
+    transparent 60%
+  );
+  transform: translateX(-100%) skewX(-15deg);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.card-shine:hover::after {
+  opacity: 1;
+  animation: cardShine 0.7s ease-out forwards;
+}
+
+/* Scan line for portrait / HUD */
+@keyframes scanLine {
+  0% {
+    top: 0;
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    top: 100%;
+    opacity: 0;
+  }
+}
+
+.animate-scan-line {
+  animation: scanLine 4s ease-in-out infinite;
+}
+
+/* Ambient gradient orb drift */
+@keyframes orbDrift {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(30px, -20px) scale(1.05);
+  }
+  66% {
+    transform: translate(-20px, 15px) scale(0.95);
+  }
+}
+
+.animate-orb-drift {
+  animation: orbDrift 18s ease-in-out infinite;
+}
+
+.animate-orb-drift-reverse {
+  animation: orbDrift 22s ease-in-out infinite reverse;
+}
+
+/* Nav link underline slide */
+.nav-link-active {
+  position: relative;
+}
+
+.nav-link-active::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #ef4444, #f87171);
+  border-radius: 2px;
+  box-shadow: 0 0 8px rgba(239, 68, 68, 0.5);
+  transform: scaleX(1);
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.nav-link-inactive {
+  position: relative;
+}
+
+.nav-link-inactive::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #ef4444, #f87171);
+  border-radius: 2px;
+  transform: scaleX(0);
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.nav-link-inactive:hover::after {
+  transform: scaleX(1);
+  box-shadow: 0 0 8px rgba(239, 68, 68, 0.3);
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .animate-hardware-float,
+  .animate-orb-drift,
+  .animate-orb-drift-reverse,
+  .animate-signal-sweep,
+  .animate-scan-line,
+  .animate-led-pulse,
+  .animate-led-green-pulse {
+    animation: none;
+  }
+
+  .card-shine:hover::after {
+    animation: none;
+    opacity: 0;
+  }
+}
 

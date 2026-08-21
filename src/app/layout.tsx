@@ -1,9 +1,16 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { siteConfig } from "@/data/portfolio";
 import PCBBackground from "@/components/ui/PCBBackground";
 import HardwareCursor from "@/components/ui/HardwareCursor";
+import ScrollProgress from "@/components/ui/ScrollProgress";
 import AIChatbot from "@/components/ui/AIChatbot";
 import "./globals.css";
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+};
 
 export const metadata: Metadata = {
   title: `${siteConfig.name} — ${siteConfig.title}`,
@@ -62,6 +69,7 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-screen antialiased bg-[#e4e7ec] text-neutral-800 relative">
+        <ScrollProgress />
         <PCBBackground />
         <HardwareCursor />
         {children}

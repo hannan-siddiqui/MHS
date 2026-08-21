@@ -36,23 +36,17 @@ export default function TextReveal({
     visible: {
       opacity: 1,
       y: 0,
-      filter: "blur(0px)",
       transition: {
-        type: "spring",
-        damping: 18,
-        stiffness: 120,
         duration: duration,
+        ease: [0.22, 1, 0.36, 1],
       },
     },
     hidden: {
       opacity: 0,
-      y: 15,
-      filter: "blur(4px)",
+      y: 12,
       transition: {
-        type: "spring",
-        damping: 18,
-        stiffness: 120,
         duration: duration,
+        ease: [0.22, 1, 0.36, 1],
       },
     },
   };

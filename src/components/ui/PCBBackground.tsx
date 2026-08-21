@@ -12,7 +12,12 @@ export default function PCBBackground() {
   if (!mounted) return null;
 
   return (
-    <div className="fixed inset-0 pointer-events-none z-[0] overflow-hidden select-none bg-[#e4e7ec]">
+    <div className="fixed inset-0 pointer-events-none z-[0] overflow-hidden select-none bg-[#e4e7ec] transform-gpu will-change-transform">
+      {/* Ambient gradient orbs */}
+      <div className="absolute top-[15%] left-[8%] w-[420px] h-[420px] rounded-full bg-radial from-red-500/[0.05] to-transparent pointer-events-none" />
+      <div className="absolute bottom-[20%] right-[5%] w-[380px] h-[380px] rounded-full bg-radial from-neutral-400/[0.08] to-transparent pointer-events-none" />
+      <div className="absolute top-[55%] left-[45%] w-[300px] h-[300px] rounded-full bg-radial from-red-400/[0.04] to-transparent pointer-events-none" />
+
       {/* Ambient Debossed Circuit Board Pattern SVG */}
       <svg
         className="absolute inset-0 w-full h-full opacity-40"

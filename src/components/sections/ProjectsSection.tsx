@@ -3,21 +3,22 @@
 import { projects } from "@/data/portfolio";
 import { ExternalLink, Code2, ArrowRight, CheckCircle2, Cpu, Grid } from "lucide-react";
 import { motion } from "framer-motion";
-import { fadeInUp, staggerContainer, slideInLeft } from "@/lib/animations";
+import { fadeInUp, staggerContainer, slideInLeft, cardHover, cardTap } from "@/lib/animations";
 import { useRouter } from "next/navigation";
 import ScrambleText from "@/components/ui/ScrambleText";
+import TextReveal from "@/components/ui/TextReveal";
 
 export default function ProjectsSection() {
   const router = useRouter();
 
   return (
-    <section id="projects" className="py-24 relative bg-[#e4e7ec] border-b border-[#cbd1dc] overflow-hidden">
+    <section id="projects" className="py-16 sm:py-24 relative bg-[#e4e7ec] border-b border-[#cbd1dc] overflow-hidden">
       <motion.div 
         variants={staggerContainer}
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
-        className="max-w-[1440px] mx-auto px-6 relative z-10 space-y-16"
+        className="max-w-[1440px] mx-auto px-4 sm:px-6 relative z-10 space-y-12 sm:space-y-16"
       >
         
         {/* Section Header */}
@@ -30,8 +31,8 @@ export default function ProjectsSection() {
               </span>
             </div>
             
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-heading font-black text-neutral-950 uppercase tracking-tight">
-              Architected AI Systems
+            <h2 className="text-2xl sm:text-4xl md:text-5xl font-heading font-black text-neutral-950 uppercase tracking-tight">
+              <TextReveal text="Architected AI Systems" as="span" />
             </h2>
           </div>
 
@@ -41,14 +42,16 @@ export default function ProjectsSection() {
         </motion.div>
 
         {/* Modular Hardware Cartridges Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           {projects.map((project, idx) => (
             <motion.div
               variants={fadeInUp}
-              whileHover={{ y: -4 }}
+              whileHover={cardHover}
+              whileTap={cardTap}
               key={project.id}
               onClick={() => router.push(`/project/${project.id}`)}
-              className="p-7 rounded-3xl neu-raised flex flex-col justify-between cursor-pointer group relative overflow-hidden h-full"
+              className="p-5 sm:p-7 rounded-3xl neu-raised flex flex-col justify-between cursor-pointer group relative overflow-hidden h-full card-shine min-w-0"
+              style={{ transitionDelay: `${idx * 0.05}s` }}
             >
               <div>
                 {/* Top Module Status Bar */}
@@ -115,12 +118,13 @@ export default function ProjectsSection() {
                 {/* Tech Stack SMD Chips */}
                 <div className="pt-4 border-t border-[#cbd1dc]/60 flex flex-wrap gap-1.5 mb-5">
                   {project.technologies.map((tech) => (
-                    <span
+                    <motion.span
                       key={tech}
+                      whileHover={{ scale: 1.08, y: -1 }}
                       className="text-[10px] font-mono uppercase tracking-wider text-neutral-700 bg-white/60 px-2.5 py-1 rounded-md border border-[#cbd1dc]/60 font-semibold"
                     >
                       {tech}
-                    </span>
+                    </motion.span>
                   ))}
                 </div>
 

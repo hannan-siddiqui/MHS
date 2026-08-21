@@ -3,18 +3,19 @@
 import { experiences } from "@/data/portfolio";
 import { Briefcase, CheckCircle2, Calendar, MapPin, Cpu } from "lucide-react";
 import { motion } from "framer-motion";
-import { fadeInUp, slideInLeft, staggerContainer } from "@/lib/animations";
+import { fadeInUp, slideInLeft, staggerContainer, cardHover, cardTap } from "@/lib/animations";
 import ScrambleText from "@/components/ui/ScrambleText";
+import TextReveal from "@/components/ui/TextReveal";
 
 export default function ExperienceSection() {
   return (
-    <section id="experience" className="py-24 relative bg-[#e4e7ec] border-b border-[#cbd1dc] overflow-hidden">
+    <section id="experience" className="py-16 sm:py-24 relative bg-[#e4e7ec] border-b border-[#cbd1dc] overflow-hidden">
       <motion.div 
         variants={staggerContainer}
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
-        className="max-w-[1440px] mx-auto px-6 relative z-10 space-y-16"
+        className="max-w-[1440px] mx-auto px-4 sm:px-6 relative z-10 space-y-12 sm:space-y-16"
       >
         
         {/* Section header */}
@@ -27,8 +28,8 @@ export default function ExperienceSection() {
               </span>
             </div>
 
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-heading font-black text-neutral-950 uppercase tracking-tight">
-              Execution Track Record
+            <h2 className="text-2xl sm:text-4xl md:text-5xl font-heading font-black text-neutral-950 uppercase tracking-tight">
+              <TextReveal text="Execution Track Record" as="span" />
             </h2>
           </div>
 
@@ -39,14 +40,20 @@ export default function ExperienceSection() {
         </motion.div>
 
         {/* Career Register Cards */}
-        <div className="flex flex-col gap-8">
-          {experiences.map((exp) => (
+        <div className="flex flex-col gap-6 sm:gap-8 relative">
+          {/* Timeline connector line */}
+          <div className="absolute left-6 top-8 bottom-8 w-px bg-gradient-to-b from-red-500/60 via-[#cbd1dc] to-transparent hidden sm:block" />
+
+          {experiences.map((exp, expIdx) => (
             <motion.div
               variants={slideInLeft}
-              whileHover={{ y: -3 }}
+              whileHover={cardHover}
+              whileTap={cardTap}
               key={exp.id}
-              className="p-8 sm:p-10 rounded-3xl neu-raised flex flex-col h-full relative overflow-hidden space-y-6"
+              className="p-5 sm:p-8 md:p-10 sm:ml-4 rounded-3xl neu-raised flex flex-col h-full relative overflow-hidden space-y-5 sm:space-y-6 card-shine min-w-0"
             >
+              {/* Timeline node */}
+              <div className="absolute -left-[9px] top-10 w-4 h-4 rounded-full led-red animate-led-pulse hidden sm:block" style={{ animationDelay: `${expIdx * 0.4}s` }} />
               {/* Header Info */}
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#cbd1dc]/60 pb-4">
                 <div className="flex items-center gap-4">
@@ -78,10 +85,18 @@ export default function ExperienceSection() {
               {/* Highlights in Stamped Slots */}
               <div className="space-y-3">
                 {exp.highlights.map((highlight, idx) => (
-                  <div key={idx} className="flex items-start gap-3 p-3.5 rounded-xl neu-inset text-xs sm:text-sm font-mono text-neutral-800 leading-relaxed">
+                  <motion.div
+                    key={idx}
+                    initial={{ opacity: 0, x: -10 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: idx * 0.08 }}
+                    whileHover={{ x: 4 }}
+                    className="flex items-start gap-3 p-3.5 rounded-xl neu-inset text-xs sm:text-sm font-mono text-neutral-800 leading-relaxed"
+                  >
                     <CheckCircle2 className="w-4 h-4 text-red-500 shrink-0 mt-0.5" />
                     <span>{highlight}</span>
-                  </div>
+                  </motion.div>
                 ))}
               </div>
               

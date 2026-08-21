@@ -1,17 +1,48 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { navigation, personalInfo } from "@/data/portfolio";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useScroll, useMotionValueEvent } from "framer-motion";
 import { useRouter, usePathname } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
-import { Cpu, Terminal, ShieldCheck } from "lucide-react";
 
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState("home");
   const router = useRouter();
   const pathname = usePathname();
+  const { scrollY } = useScroll();
+
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    setScrolled(latest > 40);
+  });
+
+  useEffect(() => {
+    const isHomePage = pathname === "/" || pathname === "";
+    if (!isHomePage) return;
+
+    const sectionIds = navigation.map((item) => item.href.replace(/^[\/#]+/, ""));
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id);
+          }
+        });
+      },
+      { rootMargin: "-40% 0px -50% 0px", threshold: 0 }
+    );
+
+    sectionIds.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+
+    return () => observer.disconnect();
+  }, [pathname]);
 
   const handleNavClick = (e: React.MouseEvent, href: string) => {
     e.preventDefault();
@@ -51,8 +82,17 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-[#e4e7ec]/90 backdrop-blur-md border-b border-[#cbd1dc] transition-all duration-300">
-      <div className="max-w-[1440px] mx-auto px-6 py-4 flex items-center justify-between">
+    <motion.nav
+      initial={{ y: -80, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+      className={`fixed top-0 left-0 right-0 z-50 border-b transition-all duration-300 ${
+        scrolled
+          ? "bg-[#e4e7ec]/95 backdrop-blur-xl border-[#cbd1dc] shadow-[0_4px_24px_rgba(160,170,190,0.25)] py-3"
+          : "bg-[#e4e7ec]/80 backdrop-blur-md border-[#cbd1dc]/60 py-4"
+      }`}
+    >
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 flex items-center justify-between">
         
         {/* Hardware Stamped Brand Logo with Biometric Avatar */}
         <Link
@@ -83,19 +123,27 @@ export default function Navbar() {
 
         {/* Desktop Flush Minimalist Hardware Tabs */}
         <div className="hidden md:flex items-center gap-8">
-          {navigation.map((item, idx) => (
-            <a
-              key={item.href}
-              href={`/${item.href}`}
-              onClick={(e) => handleNavClick(e, item.href)}
-              className="text-xs font-mono font-bold uppercase tracking-wider text-neutral-600 hover:text-neutral-950 transition-colors cursor-pointer flex items-center gap-1.5 group"
-            >
-              <span className="text-[10px] text-neutral-400 group-hover:text-red-500 font-normal">
-                0{idx + 1}.
-              </span>
-              <span>{item.label}</span>
-            </a>
-          ))}
+          {navigation.map((item, idx) => {
+            const sectionId = item.href.replace(/^[\/#]+/, "");
+            const isActive = activeSection === sectionId;
+
+            return (
+              <motion.a
+                key={item.href}
+                href={`/${item.href}`}
+                onClick={(e) => handleNavClick(e, item.href)}
+                whileHover={{ y: -1 }}
+                className={`text-xs font-mono font-bold uppercase tracking-wider transition-colors cursor-pointer flex items-center gap-1.5 group ${
+                  isActive ? "text-red-600 nav-link-active" : "text-neutral-600 hover:text-neutral-950 nav-link-inactive"
+                }`}
+              >
+                <span className={`text-[10px] font-normal transition-colors ${isActive ? "text-red-500" : "text-neutral-400 group-hover:text-red-500"}`}>
+                  0{idx + 1}.
+                </span>
+                <span>{item.label}</span>
+              </motion.a>
+            );
+          })}
         </div>
 
         {/* Right Telemetry LED Indicator & Action CTA */}
@@ -105,12 +153,14 @@ export default function Navbar() {
             <span className="font-semibold text-neutral-700">SYS_ONLINE : 200 OK</span>
           </div>
 
-          <a
+          <motion.a
             href={`mailto:${personalInfo.email}`}
+            whileHover={{ scale: 1.04 }}
+            whileTap={{ scale: 0.97 }}
             className="neu-button-primary px-5 py-2.5 text-xs rounded-xl cursor-pointer"
           >
             <span>GET IN TOUCH</span>
-          </a>
+          </motion.a>
         </div>
 
         {/* Mobile Hamburger Button */}
@@ -134,17 +184,20 @@ export default function Navbar() {
             transition={{ duration: 0.25 }}
             className="md:hidden border-t border-[#cbd1dc] bg-[#e4e7ec] shadow-xl overflow-hidden"
           >
-            <div className="px-6 py-6 flex flex-col gap-4">
+            <div className="px-6 py-6 flex flex-col gap-3">
               {navigation.map((item, idx) => (
-                <a
+                <motion.a
                   key={item.href}
                   href={`/${item.href}`}
                   onClick={(e) => handleNavClick(e, item.href)}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: idx * 0.06 }}
                   className="px-4 py-3 rounded-xl neu-raised text-xs font-mono font-bold uppercase tracking-wider text-neutral-800 flex items-center justify-between"
                 >
                   <span>{item.label}</span>
                   <span className="text-red-500 font-mono text-[10px]">0{idx + 1}</span>
-                </a>
+                </motion.a>
               ))}
 
               <a
@@ -158,6 +211,6 @@ export default function Navbar() {
           </motion.div>
         )}
       </AnimatePresence>
-    </nav>
+    </motion.nav>
   );
 }

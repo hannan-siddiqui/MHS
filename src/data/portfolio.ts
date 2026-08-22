@@ -3,9 +3,9 @@
 
 export const siteConfig = {
   name: "Mohd Hannan",
-  title: "Software Engineer & AI Engineer",
+  title: "AI Engineer",
   description:
-    "Software Engineer with 2+ years of experience building enterprise AI and full stack applications. Experienced in developing Generative AI and Agentic AI solutions with strong expertise in AWS, Azure, Microservices, and cloud native application development.",
+    "AI Engineer with 2+ years of experience building enterprise AI and full stack applications. Experienced in developing Generative AI and Agentic AI solutions with strong expertise in AWS, Azure, Microservices, and cloud native application development.",
   url: "https://hannan.in",
   ogImage: "/og-image.png",
 };
@@ -27,7 +27,7 @@ export const summary = {
   headline: "I Build Intelligent Systems",
   subheadline: "Software Engineer × AI Engineer",
   description:
-    "Software Engineer with 2+ years of experience building enterprise AI and full stack applications. Experienced in developing Generative AI and Agentic AI solutions with strong expertise in AWS, Azure, Microservices, and cloud native application development.",
+    "AI Engineer with 2+ years of experience building enterprise AI and full stack applications. Experienced in developing Generative AI and Agentic AI solutions with strong expertise in AWS, Azure, Microservices, and cloud native application development.",
   highlights: [
     "2+ years building enterprise-grade applications",
     "Expert in Generative AI & Agentic AI solutions",
@@ -172,7 +172,7 @@ export const experiences: Experience[] = [
   {
     id: "exp-1",
     company: "Stepping Cloud Consulting",
-    role: "AI/Software Engineer",
+    role: "AI Engineer",
     duration: "2025 - Present",
     location: "New Delhi, India",
     description:

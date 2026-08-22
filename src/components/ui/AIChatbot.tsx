@@ -80,7 +80,7 @@ export default function AIChatbot() {
       return `Direct Interface Ports:\n📧 Email: ${personalInfo.email}\n🔗 LinkedIn: ${personalInfo.linkedin}\n🐙 GitHub: ${personalInfo.github}\n⚡ Availability: ${personalInfo.availability}`;
     }
 
-    return `Hannan is a Software/AI Engineer with 2+ years of enterprise experience building LangGraph Agentic Workflows, Enterprise RAG solutions, and Cloud Native Microservices. Feel free to ask about his projects or transmit a message to ${personalInfo.email}!`;
+    return `Hannan is a AI Engineer with 2+ years of enterprise experience building LangGraph Agentic Workflows, Enterprise RAG solutions, and Cloud Native Microservices. Feel free to ask about his projects or transmit a message to ${personalInfo.email}!`;
   };
 
   const handleSendMessage = (textToSend?: string) => {

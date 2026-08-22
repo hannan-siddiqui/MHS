@@ -241,7 +241,7 @@ export default function HeroSection() {
                   transition={{ delay: 0.6, duration: 0.5 }}
                   className="text-xs sm:text-sm font-mono text-neutral-600 leading-relaxed pt-1"
                 >
-                  Software/AI Engineer with 2+ years of enterprise experience building Generative AI, LangGraph multi-agent workflows, and cloud native architectures.
+                  AI Engineer with 2+ years of enterprise experience building Generative AI, LangGraph multi-agent workflows, and cloud native architectures.
                 </motion.p>
               </div>
 

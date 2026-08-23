@@ -12,15 +12,15 @@ export default function PCBBackground() {
   if (!mounted) return null;
 
   return (
-    <div className="fixed inset-0 pointer-events-none z-[0] overflow-hidden select-none bg-[#e4e7ec] transform-gpu will-change-transform">
+    <div className="fixed inset-0 pointer-events-none z-[0] overflow-hidden select-none bg-[#e4e7ec]">
       {/* Ambient gradient orbs */}
-      <div className="absolute top-[15%] left-[8%] w-[420px] h-[420px] rounded-full bg-radial from-red-500/[0.05] to-transparent pointer-events-none" />
-      <div className="absolute bottom-[20%] right-[5%] w-[380px] h-[380px] rounded-full bg-radial from-neutral-400/[0.08] to-transparent pointer-events-none" />
-      <div className="absolute top-[55%] left-[45%] w-[300px] h-[300px] rounded-full bg-radial from-red-400/[0.04] to-transparent pointer-events-none" />
+      <div className="absolute top-[15%] left-[8%] w-[420px] h-[420px] rounded-full bg-radial from-red-500/[0.04] to-transparent pointer-events-none" />
+      <div className="absolute bottom-[20%] right-[5%] w-[380px] h-[380px] rounded-full bg-radial from-neutral-400/[0.06] to-transparent pointer-events-none" />
+      <div className="absolute top-[55%] left-[45%] w-[300px] h-[300px] rounded-full bg-radial from-red-400/[0.03] to-transparent pointer-events-none" />
 
       {/* Ambient Debossed Circuit Board Pattern SVG */}
       <svg
-        className="absolute inset-0 w-full h-full opacity-40"
+        className="absolute inset-0 w-full h-full opacity-35"
         xmlns="http://www.w3.org/2000/svg"
         width="100%"
         height="100%"
@@ -51,7 +51,7 @@ export default function PCBBackground() {
 
         <rect width="100%" height="100%" fill="url(#pcb-grid)" />
 
-        {/* Global Structural Bus Lines with Animated Traveling Signals */}
+        {/* Global Structural Bus Lines */}
         <g stroke="#b8c2d1" strokeWidth="2" fill="none" strokeLinecap="round">
           {/* Top-to-Bottom Data Highway Left */}
           <path d="M 120 0 L 120 400 L 180 460 L 180 1200" />
@@ -59,16 +59,10 @@ export default function PCBBackground() {
           <path d="M 1320 0 L 1320 500 L 1260 560 L 1260 1200" />
         </g>
 
-        {/* Pulsing Active Signal Packets */}
-        <g stroke="#ef4444" strokeWidth="2.5" fill="none" strokeLinecap="round" opacity="0.8">
-          <path
-            d="M 120 0 L 120 400 L 180 460 L 180 1200"
-            className="animate-wire-flow"
-          />
-          <path
-            d="M 1320 0 L 1320 500 L 1260 560 L 1260 1200"
-            className="animate-wire-flow"
-          />
+        {/* Static Crisp Signal Traces */}
+        <g stroke="#ef4444" strokeWidth="1.5" fill="none" strokeLinecap="round" opacity="0.4" strokeDasharray="8 16">
+          <path d="M 120 0 L 120 400 L 180 460 L 180 1200" />
+          <path d="M 1320 0 L 1320 500 L 1260 560 L 1260 1200" />
         </g>
       </svg>
 

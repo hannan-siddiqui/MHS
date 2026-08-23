@@ -16,7 +16,8 @@ export default function Navbar() {
   const { scrollY } = useScroll();
 
   useMotionValueEvent(scrollY, "change", (latest) => {
-    setScrolled(latest > 40);
+    const isPast = latest > 40;
+    setScrolled((prev) => (prev !== isPast ? isPast : prev));
   });
 
   useEffect(() => {

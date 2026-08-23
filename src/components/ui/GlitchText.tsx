@@ -40,24 +40,22 @@ export default function GlitchText({
           .join("")
       );
 
-      iteration += 1 / 2;
+      iteration += 1;
 
       if (iteration >= maxIterations) {
         if (intervalRef.current) clearInterval(intervalRef.current);
         setDisplayText(text);
         setIsGlitching(false);
       }
-    }, 28);
+    }, 35);
   }, [text, isGlitching, chars]);
 
   useEffect(() => {
     setDisplayText(text);
-    const timeout = setTimeout(startGlitch, 400);
     return () => {
-      clearTimeout(timeout);
       if (intervalRef.current) clearInterval(intervalRef.current);
     };
-  }, [text, startGlitch]);
+  }, [text]);
 
   return (
     <span

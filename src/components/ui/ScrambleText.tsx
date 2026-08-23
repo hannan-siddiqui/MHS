@@ -19,9 +19,9 @@ export default function ScrambleText({
   text,
   className = "",
   scrambleOnHover = true,
-  scrambleOnMount = true,
+  scrambleOnMount = false,
   delay = 200,
-  duration = 600,
+  duration = 400,
   chars = DEFAULT_CHARS,
   as: Component = "span",
 }: ScrambleTextProps) {
@@ -35,7 +35,7 @@ export default function ScrambleText({
 
     const length = text.length;
     let iteration = 0;
-    const intervalTime = Math.max(20, Math.floor(duration / (length * 3)));
+    const intervalTime = Math.max(30, Math.floor(duration / (length * 1.5)));
 
     if (intervalRef.current) clearInterval(intervalRef.current);
 
@@ -51,7 +51,7 @@ export default function ScrambleText({
           .join("")
       );
 
-      iteration += 1 / 3;
+      iteration += 1;
 
       if (iteration >= length) {
         if (intervalRef.current) clearInterval(intervalRef.current);

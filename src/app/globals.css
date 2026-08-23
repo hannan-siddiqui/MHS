@@ -262,20 +262,6 @@ section {
   position: relative;
 }
 
-/* Custom Hardware Cursor Styling (Desktop Only) */
-@media (pointer: fine) {
-  body.custom-cursor-enabled,
-  body.custom-cursor-enabled * {
-    cursor: none !important;
-  }
-
-  body.custom-cursor-enabled input,
-  body.custom-cursor-enabled textarea,
-  body.custom-cursor-enabled [contenteditable="true"] {
-    cursor: text !important;
-  }
-}
-
 @keyframes pingOnce {
   0% {
     transform: translate(-50%, -50%) scale(0.2);
@@ -304,15 +290,13 @@ section {
   animation: blinkCursor 0.9s ease-in-out infinite;
 }
 
-/* LED pulse — hardware status indicator */
+/* LED pulse — GPU-composited opacity only (zero CPU paint thrashing) */
 @keyframes ledPulse {
   0%, 100% {
     opacity: 1;
-    box-shadow: 0 0 6px #ef4444, 0 0 14px rgba(239, 68, 68, 0.75), inset 0 0 2px rgba(255, 255, 255, 0.8);
   }
   50% {
-    opacity: 0.65;
-    box-shadow: 0 0 3px #ef4444, 0 0 8px rgba(239, 68, 68, 0.4), inset 0 0 2px rgba(255, 255, 255, 0.6);
+    opacity: 0.5;
   }
 }
 
@@ -323,11 +307,9 @@ section {
 @keyframes ledPulseGreen {
   0%, 100% {
     opacity: 1;
-    box-shadow: 0 0 6px #10b981, 0 0 14px rgba(16, 185, 129, 0.75);
   }
   50% {
-    opacity: 0.7;
-    box-shadow: 0 0 3px #10b981, 0 0 8px rgba(16, 185, 129, 0.4);
+    opacity: 0.55;
   }
 }
 
@@ -341,12 +323,12 @@ section {
     transform: translateY(0);
   }
   50% {
-    transform: translateY(-6px);
+    transform: translateY(-4px);
   }
 }
 
 .animate-hardware-float {
-  animation: hardwareFloat 5s ease-in-out infinite;
+  animation: hardwareFloat 6s ease-in-out infinite;
 }
 
 /* Signal sweep across dividers */

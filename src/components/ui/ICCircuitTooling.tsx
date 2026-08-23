@@ -65,31 +65,16 @@ export default function ICCircuitTooling() {
           <path d="M 66.66% 0 L 66.66% 200 L calc(66.66% - 40px) 240 L calc(66.66% - 40px) 800" />
         </g>
 
-        {/* Animated Traveling Data Pulses across the IC Busses */}
-        <g stroke="#ef4444" strokeWidth="2.5" fill="none" strokeLinecap="round" opacity="0.85">
-          <path
-            d="M 0 45 L 240 45 L 280 85 L 850 85 L 890 45 L 1440 45"
-            className="animate-wire-flow"
-          />
-          <path
-            d="M 0 320 L 400 320 L 440 360 L 980 360 L 1020 320 L 1440 320"
-            className="animate-wire-flow-fast"
-          />
-          <path
-            d="M 0 680 L 320 680 L 360 640 L 1100 640 L 1140 680 L 1440 680"
-            className="animate-wire-flow"
-          />
+        {/* Static Crisp Silk-Screen Traces */}
+        <g stroke="#ef4444" strokeWidth="1.5" fill="none" strokeLinecap="round" opacity="0.4" strokeDasharray="6 14">
+          <path d="M 0 45 L 240 45 L 280 85 L 850 85 L 890 45 L 1440 45" />
+          <path d="M 0 320 L 400 320 L 440 360 L 980 360 L 1020 320 L 1440 320" />
+          <path d="M 0 680 L 320 680 L 360 640 L 1100 640 L 1140 680 L 1440 680" />
         </g>
 
-        <g stroke="#10b981" strokeWidth="2" fill="none" strokeLinecap="round" opacity="0.75">
-          <path
-            d="M 33.33% 0 L 33.33% 200 L calc(33.33% + 40px) 240 L calc(33.33% + 40px) 800"
-            className="animate-wire-flow-fast"
-          />
-          <path
-            d="M 66.66% 0 L 66.66% 200 L calc(66.66% - 40px) 240 L calc(66.66% - 40px) 800"
-            className="animate-wire-flow"
-          />
+        <g stroke="#10b981" strokeWidth="1.5" fill="none" strokeLinecap="round" opacity="0.35" strokeDasharray="6 14">
+          <path d="M 33.33% 0 L 33.33% 200 L calc(33.33% + 40px) 240 L calc(33.33% + 40px) 800" />
+          <path d="M 66.66% 0 L 66.66% 200 L calc(66.66% - 40px) 240 L calc(66.66% - 40px) 800" />
         </g>
       </svg>
 

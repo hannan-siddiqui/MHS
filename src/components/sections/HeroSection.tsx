@@ -73,7 +73,7 @@ export default function HeroSection() {
       ref: rightCard1Ref,
       icon: Code2,
       badge: "Web & APIs",
-      title: "FULL STACK STACK",
+      title: "FULL STACK DEVELOPMENT",
       tags: ["Next.js 15", "React.js", "FastAPI", "Node.js"],
       desc: "TypeScript, Python, Java & REST/GraphQL",
       led: "green" as const,
@@ -181,7 +181,7 @@ export default function HeroSection() {
             <motion.div
               ref={centerPanelRef}
               variants={springPop}
-              className="w-full max-w-[560px] p-4 sm:p-7 md:p-8 rounded-3xl neu-raised-thick relative space-y-4 sm:space-y-6 animate-hardware-float card-shine min-w-0 overflow-hidden"
+              className="w-full max-w-[560px] p-4 sm:p-7 md:p-8 rounded-3xl neu-raised-thick relative space-y-4 sm:space-y-6 card-shine min-w-0 overflow-hidden"
             >
               
               <div className="flex items-center justify-between border-b border-[#cbd1dc]/60 pb-3 sm:pb-4 gap-2">

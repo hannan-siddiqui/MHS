@@ -20,6 +20,7 @@ export const personalInfo = {
   github: "https://github.com/hannan-siddiqui",
   location: "India",
   resumeUrl: "/resume.pdf",
+  avatarUrl: "/profile.png",
   availability: "Open to opportunities",
 };
 

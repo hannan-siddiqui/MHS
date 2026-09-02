@@ -103,7 +103,7 @@ export default function Navbar() {
         >
           <div className="w-9 h-9 rounded-xl neu-raised relative overflow-hidden flex items-center justify-center p-0.5 border border-white/80 group-hover:border-red-500/70 transition-colors shrink-0">
             <Image
-              src="/profile.jpg"
+              src={personalInfo.avatarUrl || "/profile.png"}
               alt={`${personalInfo.firstName} ${personalInfo.lastName}`}
               width={36}
               height={36}

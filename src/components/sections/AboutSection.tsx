@@ -59,7 +59,7 @@ export default function AboutSection() {
             <div className="relative rounded-2xl overflow-hidden neu-inset p-1.5 border border-white/70 shadow-inner">
               <div className="relative aspect-[4/5] w-full rounded-xl overflow-hidden bg-neutral-950">
                 <Image
-                  src="/profile.jpg"
+                  src={personalInfo.avatarUrl || "/profile.png"}
                   alt={`${personalInfo.firstName} ${personalInfo.lastName}`}
                   fill
                   sizes="(max-width: 768px) 100vw, 33vw"

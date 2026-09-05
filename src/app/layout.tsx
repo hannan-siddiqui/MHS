@@ -42,6 +42,16 @@ export const metadata: Metadata = {
     title: `${siteConfig.name} — ${siteConfig.title}`,
     description: siteConfig.description,
   },
+  icons: {
+    icon: [
+      { url: "/profile.png" },
+      { url: "/icon.png" },
+    ],
+    apple: [
+      { url: "/profile.png" },
+    ],
+    shortcut: "/profile.png",
+  },
   robots: {
     index: true,
     follow: true,
@@ -56,6 +66,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        <link rel="icon" href="/profile.png" type="image/png" />
+        <link rel="apple-touch-icon" href="/profile.png" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
           rel="preconnect"

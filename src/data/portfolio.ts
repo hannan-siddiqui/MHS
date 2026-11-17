@@ -205,6 +205,31 @@ export const experiences: Experience[] = [
       "AWS DynamoDB"
     ],
   },
+  {
+    id: "exp-2",
+    company: "HelioShift",
+    role: "Software Engineer",
+    duration: "Feb 2024 – Feb 2025",
+    location: "Delhi, India",
+    description:
+      "Engineered a full-stack Remote Monitoring System (RMS) and high-throughput IoT telemetry ingestion pipelines.",
+    highlights: [
+      "Engineered a full-stack Remote Monitoring System (RMS) using Next.js, Node.js, MongoDB, and Redis, enabling real-time telemetry ingestion and visualization across multi-device IoT loggers.",
+      "Optimized MongoDB write throughput using Redis batch buffering, building a Node.js 3-minute polling worker that flushes 1,000+ queued packets in bulk and clears processed cache keys, drastically reducing individual database insert calls.",
+      "Engineered a multi-tenant MongoDB routing schema and 15-minute Node.js aggregation cron jobs to map unique logger-to-device telemetry across plants, ensuring accurate daily rollups for real-time Next.js dashboards and AI-assisted operational analytics.",
+    ],
+    technologies: [
+      "Next.js",
+      "Node.js",
+      "MongoDB",
+      "Redis",
+      "IoT Telemetry",
+      "Multi-Tenant Architecture",
+      "Aggregation Pipelines",
+      "Cron Jobs",
+      "TypeScript",
+    ],
+  },
 ];
 
 export const footerConfig = {

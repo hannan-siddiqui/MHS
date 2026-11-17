@@ -76,6 +76,10 @@ export default function AIChatbot() {
       return `Hannan's top featured projects include:\n1. ⚡ HyperCart AI — Autonomous Multi-Agent E-Commerce OS\n2. 🏠 Proptech — Smart Property Assistant (Text-to-SQL + RAG Intent Router)\n3. 📄 Infuse — Enterprise RAG Document Analyzer (Hybrid Vector Search)\nExplore the case study cartridges for full architectural diagrams!`;
     }
 
+    if (q.includes("experience") || q.includes("helioshift") || q.includes("stepping cloud") || q.includes("career") || q.includes("companies")) {
+      return `Hannan's Professional Track Record:\n• AI Engineer @ Stepping Cloud Consulting (2025 - Present): Architecting enterprise RAG pipelines, AWS Bedrock email automation, and Azure OpenAI guardrails.\n• Software Engineer @ HelioShift (Feb 2024 – Feb 2025): Engineered full-stack Remote Monitoring Systems (RMS) using Next.js, Node.js, MongoDB & Redis for real-time multi-device IoT telemetry.`;
+    }
+
     if (q.includes("contact") || q.includes("hire") || q.includes("email") || q.includes("reach")) {
       return `Direct Interface Ports:\n📧 Email: ${personalInfo.email}\n🔗 LinkedIn: ${personalInfo.linkedin}\n🐙 GitHub: ${personalInfo.github}\n⚡ Availability: ${personalInfo.availability}`;
     }
